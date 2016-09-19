@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace TodoApi\Http\Controllers\Auth;
 
-use App\User;
+use TodoApi\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use TodoApi\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
