@@ -5,6 +5,9 @@ namespace TodoApi\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * User Model
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -15,7 +18,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -24,6 +29,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
+
+    public function todos()
+    {
+        return $this->hasMany(Todo::class);
+    }
 }

@@ -177,6 +177,11 @@ return [
         // TodoApi\Providers\BroadcastServiceProvider::class,
         TodoApi\Providers\EventServiceProvider::class,
         TodoApi\Providers\RouteServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        TodoApi\Providers\FractalServiceProvider::class,
+        Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
     ],
 
@@ -224,6 +229,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Uuid' => Webpatser\Uuid\Uuid::class,
 
     ],
 

@@ -12,12 +12,27 @@
 */
 
 $factory->define(TodoApi\Models\User::class, function (Faker\Generator $faker) {
-    static $password;
+    $faker = Faker\Factory::create('sr_Latn_RS');
 
     return [
+        'uuid' => Uuid::generate(4),
         'name' => $faker->name,
         'email' => $faker->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'password' => bcrypt('secret'),
+    ];
+});
+
+$factory->define(TodoApi\Models\Todo::class, function (Faker\Generator $faker) {
+    $faker = Faker\Factory::create('sr_Latn_RS');
+
+    $isCompleted = $faker->boolean(50);
+    $isActive = ($isCompleted) ? true : $faker->boolean(33);
+
+    return [
+        'uuid' => Uuid::generate(4),
+        'content' => $faker->text(100),
+        'is_active' => $isActive,
+        'is_completed' => $isCompleted,
+        'user_id' => $faker->numberBetween(1, 10),
     ];
 });

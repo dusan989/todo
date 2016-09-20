@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => TodoApi\User::class,
+            'model' => TodoApi\Models\User::class,
         ],
 
         // 'users' => [

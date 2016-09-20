@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Dingo\Api\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,49 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+$api = app(Router::class);
+
+$api->version('v1', [
+    'middleware' => [
+        'api.throttle',
+        'cors',
+    ],
+    'limit' => 100,
+    'expires' => 5,
+], function ($api) {
+    $api->group([
+        'prefix' => 'users',
+        'middleware' => 'api.auth',
+    ], function ($api) {
+        $api->get('/', [
+            'as' => 'users.index',
+            'uses' => 'TodoApi\Http\Controllers\UserController@index',
+        ]);
+
+        $api->get('me', [
+            'as' => 'users.me',
+            'middleware' => 'api.auth',
+            'uses' => 'TodoApi\Http\Controllers\UserController@me',
+        ]);
+    });
+
+    $api->group([
+        'prefix' => 'todos',
+        'middleware' => 'api.auth',
+    ], function ($api) {
+        $api->get('/', [
+            'as' => 'todos.index',
+            'uses' => 'TodoApi\Http\Controllers\TodoController@index',
+        ]);
+    });
+
+    $api->post('login', [
+        'as' => 'auth.login',
+        'uses' => 'TodoApi\Http\Controllers\AuthController@login',
+    ]);
+
+    $api->post('register', [
+        'as' => 'auth.register',
+        'uses' => 'TodoApi\Http\Controllers\AuthController@register',
+    ]);
+});
