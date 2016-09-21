@@ -12,17 +12,28 @@ use TodoApi\Transformers\UserTransformer;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Uuid;
+use Illuminate\Container\Container as App;
 
 class AuthController extends Controller
 {
     /**
+     * Constructor method
+     *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Container\Container  $app
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, App $app)
     {
-        parent::__construct($request);
+        parent::__construct($request, $app);
     }
 
+    /**
+     * Login method
+     *
+     * @return \Dingo\Api\Http\Response
+     *
+     * @throws \Dingo\Api\Exception\ValidationHttpException
+     */
     public function login()
     {
         $credentials = $this->request->only('email', 'password');
@@ -39,17 +50,26 @@ class AuthController extends Controller
         try {
             $token = JWTAuth::attempt($credentials);
             if (!$token) {
-                return $this->response->errorNotFound();
+                $response = $this->response->errorNotFound();
+            } else {
+                $response = $this->response->array([
+                    'token' => $token,
+                ]);
             }
         } catch (JWTException $e) {
-            return $this->response->errorInternal();
+            $response = $this->response->errorInternal();
         }
 
-        return $this->response->array([
-            'token' => $token,
-        ]);
+        return $response;
     }
 
+    /**
+     * Register method
+     *
+     * @return \Dingo\Api\Http\Response
+     *
+     * @throws \Dingo\Api\Exception\ValidationHttpException
+     */
     public function register()
     {
         $userData = $this->request->only('email', 'password', 'name');
@@ -71,9 +91,11 @@ class AuthController extends Controller
         $user->email = $userData['email'];
 
         if ($user->save()) {
-            return $this->response->created();
+            $response = $this->response->created();
         } else {
-            return $this->response->errorInternal();
+            $response = $this->response->errorInternal();
         }
+
+        return $response;
     }
 }

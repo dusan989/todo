@@ -26,7 +26,7 @@ class FractalServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(Manager::class, function($app) {
+        $this->app->bind(Manager::class, function ($app) {
             $fractal = new Manager;
 
             $serializer = new JsonApiSerializer(config('domain'));
@@ -36,7 +36,7 @@ class FractalServiceProvider extends ServiceProvider
             return $fractal;
         });
 
-        $this->app->bind(Fractal::class, function($app) {
+        $this->app->bind(Fractal::class, function ($app) {
             $fractal = $app->make(Manager::class);
 
             return new Fractal($fractal);

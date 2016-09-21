@@ -2,6 +2,7 @@
 
 namespace TodoApi\Http\Controllers;
 
+use Illuminate\Container\Container as App;
 use Illuminate\Http\Request;
 use TodoApi\Models\Todo;
 use TodoApi\Transformers\TodoTransformer;
@@ -9,48 +10,72 @@ use TodoApi\Transformers\TodoTransformer;
 class TodoController extends Controller
 {
     /**
-     * @param  \Illuminate\Http\Request  $request
+     * Item type
+     *
+     * @var array
      */
-    public function __construct(Request $request)
+    private $type = [
+        'key' => 'todos',
+    ];
+
+    /**
+     * Constructor method
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Container\Container  $app
+     */
+    public function __construct(Request $request, App $app)
     {
-        parent::__construct($request);
+        parent::__construct($request, $app);
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the todos for current user.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Dingo\Api\Http\Response
      */
     public function index()
     {
         $todos = $this->auth->user()->todos;
 
-        return $this->response->collection($todos, new TodoTransformer, [
-            'key' => 'todos',
-        ]);
+        if (empty($todos)) {
+            $response = $this->response->errorNotFound();
+        } else {
+            $response = $this->response->collection($todos, new TodoTransformer, $this->type);
+        }
+
+        return $response;
     }
 
     // /**
     //  * Store a newly created resource in storage.
     //  *
-    //  * @return \Illuminate\Http\Response
+    //  * @return \Dingo\Api\Http\Response
     //  */
     // public function store()
     // {
     //     //
     // }
-    //
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     //
-    // }
-    //
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  string  $uuid
+     * @return \Dingo\Api\Http\Response
+     */
+    public function show($uuid)
+    {
+        $todo = Todo::where('uuid', $uuid)->first();
+
+        if (empty($todo)) {
+            $response = $this->response->errorNotFound();
+        } else {
+            $response = $this->response->item($todo, new TodoTransformer, $this->type);
+        }
+
+        return $response;
+    }
+
     // /**
     //  * Update the specified resource in storage.
     //  *
@@ -61,15 +86,28 @@ class TodoController extends Controller
     // {
     //     //
     // }
-    //
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  string  $uuid
+     * @return \Dingo\Api\Http\Response
+     */
+    public function destroy($uuid)
+    {
+        $todo = Todo::where('uuid', $uuid)->first();
+
+        if (empty($todo)) {
+            $response = $this->response->noContent();
+        } else {
+            if ($todo->delete()) {
+                // TODO Fix this
+                $response = $this->response->noContent();
+            } else {
+                $response = $this->response->errorInternal();
+            }
+        }
+
+        return $response;
+    }
 }

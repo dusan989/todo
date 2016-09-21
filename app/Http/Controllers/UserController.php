@@ -8,25 +8,35 @@ use TodoApi\Transformers\UserTransformer;
 
 class UserController extends Controller
 {
-    public function __construct(Request $request)
+    /**
+     * Item type
+     *
+     * @var array
+     */
+    private $type = [
+        'key' => 'users',
+    ];
+
+    /**
+     * Constructor method
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Container\Container  $app
+     */
+    public function __construct(Request $request, App $app)
     {
-        parent::__construct($request);
+        parent::__construct($request, $app);
     }
 
-    public function index()
-    {
-        $user = User::all();
-
-        return $this->response->collection($user, new UserTransformer, [
-            'key' => 'users',
-        ]);
-    }
-
+    /**
+     * Get info about current user
+     *
+     * @return \Dingo\Api\Http\Response
+     */
     public function me()
     {
-        return $this->response->item($this->auth->user(), new UserTransformer, [
-            'key' => 'users',
-            'relationship' => 'todos',
-        ]);
+        $me = $this->auth->user();
+
+        return $this->response->item($me, new UserTransformer, $this->type);
     }
 }

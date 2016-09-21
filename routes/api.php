@@ -27,11 +27,6 @@ $api->version('v1', [
         'prefix' => 'users',
         'middleware' => 'api.auth',
     ], function ($api) {
-        $api->get('/', [
-            'as' => 'users.index',
-            'uses' => 'TodoApi\Http\Controllers\UserController@index',
-        ]);
-
         $api->get('me', [
             'as' => 'users.me',
             'middleware' => 'api.auth',
@@ -46,6 +41,16 @@ $api->version('v1', [
         $api->get('/', [
             'as' => 'todos.index',
             'uses' => 'TodoApi\Http\Controllers\TodoController@index',
+        ]);
+
+        $api->get('/{uuid}', [
+            'as' => 'todos.show',
+            'uses' => 'TodoApi\Http\Controllers\TodoController@show',
+        ]);
+
+        $api->delete('/{uuid}', [
+            'as' => 'todos.destroy',
+            'uses' => 'TodoApi\Http\Controllers\TodoController@destroy',
         ]);
     });
 

@@ -18,7 +18,7 @@ $factory->define(TodoApi\Models\User::class, function (Faker\Generator $faker) {
         'uuid' => Uuid::generate(4),
         'name' => $faker->name,
         'email' => $faker->safeEmail,
-        'password' => bcrypt('secret'),
+        'password' => bcrypt('123456789'),
     ];
 });
 
