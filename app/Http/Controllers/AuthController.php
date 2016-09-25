@@ -8,6 +8,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use TodoApi\Http\Controllers\Controller;
 use TodoApi\Managers\AuthManager;
+use TodoApi\Transformers\UserTransformer;
+use Dingo\Api\Exception\ValidationHttpException;
 
 /**
  * Auth Controller
@@ -44,14 +46,8 @@ class AuthController extends Controller
     {
         $credentials = $this->request->only('email', 'password');
 
-        try {
-            $token = $this->manager->login($credentials);
-            $response = $this->response->array($token);
-        } catch (NotFoundHttpException $e) {
-            $response = $this->response->errorNotFound();
-        } catch (HttpException $e) {
-            $response = $this->response->errorInternal();
-        }
+        $token = $this->manager->login($credentials);
+        $response = $this->response->array($token);
 
         return $response;
     }
@@ -65,12 +61,14 @@ class AuthController extends Controller
     {
         $credentials = $this->request->only('email', 'password', 'name');
 
-        try {
-            $this->manager->register($credentials);
-            $response = $this->response->created();
-        } catch (HttpException $e) {
-            $response = $this->response->errorInternal();
-        }
+        $user = $this->manager->register($credentials);
+        $location = route('users.me');
+        $response = $this->response
+            ->item($user, new UserTransformer, [
+                'key' => 'users',
+            ])
+            ->setStatusCode(201)
+            ->withHeader('Location', $location);
 
         return $response;
     }

@@ -16,6 +16,14 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./app</directory>
+            <exclude>
+                <directory suffix=".php">./app/Console</directory>
+                <directory suffix=".php">./app/Exceptions</directory>
+                <file suffix=".php">./app/Http/Middleware/EncryptCookies.php</file>
+                <file suffix=".php">./app/Http/Middleware/RedirectIfAuthenticated.php</file>
+                <file suffix=".php">./app/Http/Middleware/VerifyCsrfToken.php</file>
+                <file suffix=".php">./app/Http/Kernel.php</file>
+            </exclude>
         </whitelist>
     </filter>
     <php>
@@ -23,5 +31,11 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
+        <env name="API_DOMAIN" value="127.0.0.1"/>
     </php>
+    <logging>
+    <log type="coverage-html" target="./report" charset="UTF-8"
+        yui="true" highlight="true"
+        lowUpperBound="50" highLowerBound="80" />
+    </logging>
 </phpunit>

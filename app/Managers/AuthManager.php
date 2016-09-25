@@ -6,8 +6,10 @@ use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Validation\Factory as Validator;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use TodoApi\Models\User;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Uuid;
 
 /**
  * Auth Manager
@@ -63,7 +65,7 @@ class AuthManager
                 ];
             }
         } catch (JWTException $e) {
-            throw new HttpException;
+            throw new HttpException(500);
         }
     }
 
@@ -72,7 +74,7 @@ class AuthManager
      *
      * @param  array  $credentials
      *
-     * @return boolean
+     * @return \TodoApi\Models\User
      *
      * @throws \Dingo\Api\Exception\ValidationHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
@@ -96,9 +98,9 @@ class AuthManager
         $user->email = $credentials['email'];
 
         if ($user->save()) {
-            $response = true;
+            $response = $user;
         } else {
-            throw new HttpException;
+            throw new HttpException(500);
         }
 
         return $response;

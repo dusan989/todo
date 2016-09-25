@@ -94,7 +94,7 @@ class TodoManager
         if ($todo->delete()) {
             $response = true;
         } else {
-            throw new HttpException;
+            throw new HttpException(500);
         }
 
         return $response;
@@ -133,7 +133,7 @@ class TodoManager
         if ($todo->save()) {
             $response = $todo;
         } else {
-            throw new HttpException;
+            throw new HttpException(500);
         }
 
         return $todo;
@@ -171,7 +171,7 @@ class TodoManager
         if ($todo->save()) {
             $response = $todo;
         } else {
-            throw new HttpException;
+            throw new HttpException(500);
         }
 
         return $response;

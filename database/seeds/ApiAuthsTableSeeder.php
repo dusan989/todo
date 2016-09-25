@@ -13,7 +13,7 @@ class ApiAuthsTableSeeder extends Seeder
     public function run()
     {
         $apiAuth = new ApiAuth;
-        $apiAuth->uuid = Uuid::generate(4);
+        $apiAuth->uuid = '442195b3-6389-4d8c-a283-4d1d7313d6da';
         $apiAuth->name = 'Todo API Admin Panel';
         $apiAuth->is_admin = true;
         $apiAuth->save();

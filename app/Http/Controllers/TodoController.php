@@ -51,14 +51,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        try {
-            $todos = $this->manager->all($this->auth->user());
-            $response = $this->response->collection($todos, new TodoTransformer, $this->type);
-        } catch (NotFoundHttpException $e) {
-            $response = $this->response->errorNotFound();
-        } catch (HttpException $e) {
-            $response = $this->response->errorInternal();
-        }
+        $todos = $this->manager->all($this->auth->user());
+
+        $response = $this->response->collection($todos, new TodoTransformer, $this->type);
 
         return $response;
     }
@@ -72,20 +67,16 @@ class TodoController extends Controller
     {
         $data = $this->request->input('data.attributes');
 
-        try {
-            $todo = $this->manager->create($this->auth->user(), $data);
+        $todo = $this->manager->create($this->auth->user(), $data);
 
-            $location = route('todos.show', [
-                'uuid' => $todo->uuid,
-            ]);
+        $location = route('todos.show', [
+            'uuid' => $todo->uuid,
+        ]);
 
-            $response = $this->response
-                ->item($todo, new TodoTransformer, $this->type)
-                ->setStatusCode(201)
-                ->withHeader('Location', $location);
-        } catch (HttpException $e) {
-            $response = $this->response->errorInternal();
-        }
+        $response = $this->response
+            ->item($todo, new TodoTransformer, $this->type)
+            ->setStatusCode(201)
+            ->withHeader('Location', $location);
 
         return $response;
     }
@@ -99,14 +90,9 @@ class TodoController extends Controller
      */
     public function show($uuid)
     {
-        try {
-            $todo = $this->manager->get($this->auth->user(), $uuid);
-            $response = $this->response->item($todo, new TodoTransformer, $this->type);
-        } catch (NotFoundHttpException $e) {
-            $response = $this->response->errorNotFound();
-        } catch (HttpException $e) {
-            $response = $this->response->errorInternal();
-        }
+        $todo = $this->manager->get($this->auth->user(), $uuid);
+
+        $response = $this->response->item($todo, new TodoTransformer, $this->type);
 
         return $response;
     }
@@ -122,21 +108,15 @@ class TodoController extends Controller
     {
         $data = $this->request->input('data.attributes');
 
-        try {
-            $todo = $this->manager->update($this->auth->user(), $data, $uuid);
+        $todo = $this->manager->update($this->auth->user(), $data, $uuid);
 
-            $location = route('todos.show', [
-                'uuid' => $todo->uuid,
-            ]);
+        $location = route('todos.show', [
+            'uuid' => $todo->uuid,
+        ]);
 
-            $response = $this->response
-                ->item($todo, new TodoTransformer, $this->type)
-                ->withHeader('Location', $location);
-        } catch (NotFoundHttpException $e) {
-            $response = $this->response->errorNotFound();
-        } catch (HttpException $e) {
-            $response = $this->response->errorInternal();
-        }
+        $response = $this->response
+            ->item($todo, new TodoTransformer, $this->type)
+            ->withHeader('Location', $location);
 
         return $response;
     }
@@ -150,14 +130,9 @@ class TodoController extends Controller
      */
     public function destroy($uuid)
     {
-        try {
-            $destroy = $this->manager->remove($this->auth->user(), $uuid);
-            $response = $this->response->noContent();
-        } catch (NotFoundHttpException $e) {
-            $response = $this->response->errorNotFound();
-        } catch (HttpException $e) {
-            $response = $this->response->errorInternal();
-        }
+        $destroy = $this->manager->remove($this->auth->user(), $uuid);
+
+        $response = $this->response->noContent();
 
         return $response;
     }

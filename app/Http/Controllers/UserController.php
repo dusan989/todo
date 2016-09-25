@@ -2,9 +2,9 @@
 
 namespace TodoApi\Http\Controllers;
 
+use Illuminate\Container\Container as App;
 use Illuminate\Http\Request;
 use TodoApi\Http\Controllers\Controller;
-use TodoApi\Models\User;
 use TodoApi\Transformers\UserTransformer;
 
 /**
