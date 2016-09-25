@@ -3,9 +3,13 @@
 namespace TodoApi\Http\Controllers;
 
 use Illuminate\Http\Request;
+use TodoApi\Http\Controllers\Controller;
 use TodoApi\Models\User;
 use TodoApi\Transformers\UserTransformer;
 
+/**
+ * User Controller
+ */
 class UserController extends Controller
 {
     /**
@@ -20,7 +24,7 @@ class UserController extends Controller
     /**
      * Constructor method
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request         $request
      * @param  \Illuminate\Container\Container  $app
      */
     public function __construct(Request $request, App $app)

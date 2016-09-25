@@ -2,28 +2,36 @@
 
 namespace TodoApi\Http\Controllers;
 
-use Dingo\Api\Exception\ValidationHttpException;
+use Illuminate\Container\Container as App;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use TodoApi\Http\Controllers\Controller;
-use TodoApi\Models\User;
-use TodoApi\Transformers\UserTransformer;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Uuid;
-use Illuminate\Container\Container as App;
+use TodoApi\Managers\AuthManager;
 
+/**
+ * Auth Controller
+ */
 class AuthController extends Controller
 {
     /**
+     * Manager instance
+     *
+     * @var \TodoApi\Managers\AuthManager
+     */
+    private $manager;
+
+    /**
      * Constructor method
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \TodoApi\Managers\AuthManager    $manager
+     * @param  \Illuminate\Http\Request         $request
      * @param  \Illuminate\Container\Container  $app
      */
-    public function __construct(Request $request, App $app)
+    public function __construct(AuthManager $manager, Request $request, App $app)
     {
+        $this->manager = $manager;
+
         parent::__construct($request, $app);
     }
 
@@ -31,32 +39,17 @@ class AuthController extends Controller
      * Login method
      *
      * @return \Dingo\Api\Http\Response
-     *
-     * @throws \Dingo\Api\Exception\ValidationHttpException
      */
     public function login()
     {
         $credentials = $this->request->only('email', 'password');
 
-        $validator = app('validator')->make($credentials, [
-            'email' => 'required|email',
-            'password' => 'required|string|min:8',
-        ]);
-
-        if ($validator->fails()) {
-            throw new ValidationHttpException($validator->errors());
-        }
-
         try {
-            $token = JWTAuth::attempt($credentials);
-            if (!$token) {
-                $response = $this->response->errorNotFound();
-            } else {
-                $response = $this->response->array([
-                    'token' => $token,
-                ]);
-            }
-        } catch (JWTException $e) {
+            $token = $this->manager->login($credentials);
+            $response = $this->response->array($token);
+        } catch (NotFoundHttpException $e) {
+            $response = $this->response->errorNotFound();
+        } catch (HttpException $e) {
             $response = $this->response->errorInternal();
         }
 
@@ -67,32 +60,15 @@ class AuthController extends Controller
      * Register method
      *
      * @return \Dingo\Api\Http\Response
-     *
-     * @throws \Dingo\Api\Exception\ValidationHttpException
      */
     public function register()
     {
-        $userData = $this->request->only('email', 'password', 'name');
+        $credentials = $this->request->only('email', 'password', 'name');
 
-        $validator = app('validator')->make($userData, [
-            'email' => 'required|email',
-            'password' => 'required|string|min:8',
-            'name' => 'required|string|min:5',
-        ]);
-
-        if ($validator->fails()) {
-            throw new ValidationHttpException($validator->errors());
-        }
-
-        $user = new User;
-        $user->uuid = Uuid::generate(4);
-        $user->name = $userData['name'];
-        $user->password = bcrypt($userData['password']);
-        $user->email = $userData['email'];
-
-        if ($user->save()) {
+        try {
+            $this->manager->register($credentials);
             $response = $this->response->created();
-        } else {
+        } catch (HttpException $e) {
             $response = $this->response->errorInternal();
         }
 

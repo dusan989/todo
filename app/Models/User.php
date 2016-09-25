@@ -2,8 +2,9 @@
 
 namespace TodoApi\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use TodoApi\Models\Todo;
 
 /**
  * User Model
@@ -32,6 +33,11 @@ class User extends Authenticatable
         'password',
     ];
 
+    /**
+     * Get list of all todos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function todos()
     {
         return $this->hasMany(Todo::class);

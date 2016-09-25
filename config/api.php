@@ -156,7 +156,7 @@ return [
     */
 
     'middleware' => [
-
+        TodoApi\Http\Middleware\CheckApiKey::class,
     ],
 
     /*

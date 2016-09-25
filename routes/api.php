@@ -20,7 +20,7 @@ $api->version('v1', [
         'api.throttle',
         'cors',
     ],
-    'limit' => 100,
+    'limit' => 1000,
     'expires' => 5,
 ], function ($api) {
     $api->group([
@@ -51,6 +51,16 @@ $api->version('v1', [
         $api->delete('/{uuid}', [
             'as' => 'todos.destroy',
             'uses' => 'TodoApi\Http\Controllers\TodoController@destroy',
+        ]);
+
+        $api->post('/', [
+            'as' => 'todos.store',
+            'uses' => 'TodoApi\Http\Controllers\TodoController@store',
+        ]);
+
+        $api->put('/{uuid}', [
+            'as' => 'todos.update',
+            'uses' => 'TodoApi\Http\Controllers\TodoController@update',
         ]);
     });
 

@@ -182,6 +182,7 @@ return [
         Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
+        TodoApi\Providers\ManagersServiceProvider::class,
 
     ],
 

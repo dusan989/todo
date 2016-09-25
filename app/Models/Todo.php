@@ -3,7 +3,11 @@
 namespace TodoApi\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use TodoApi\Models\User;
 
+/**
+ * Todo Model
+ */
 class Todo extends Model
 {
     /**
@@ -27,7 +31,12 @@ class Todo extends Model
         'is_completed' => 'boolean',
     ];
 
-    public function user()
+    /**
+     * Get author of the todo
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function author()
     {
         return $this->belongsTo(User::class);
     }
