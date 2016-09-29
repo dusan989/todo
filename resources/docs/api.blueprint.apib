@@ -1,0 +1,681 @@
+FORMAT: 1A
+
+# TODO ITK
+
+# Users [/v1/users]
+Users endpoints. User can receive data about him.
+
+## Me [GET /v1/users/me]
+Get info about current user.
+
++ Request (application/json)
+    + Headers
+
+            apikey: 442195b3-6389-4d8c-a283-4d1d7313d6da
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8
+
++ Response 200 (application/json)
+
+    + Attributes
+        + data (object, required) - Users data object.
+    + Body
+
+            {
+                "data": {
+                    "type": "users",
+                    "id": "cbbae68f-55bd-4dd3-8264-c367ce7d8446",
+                    "attributes": {
+                        "name": "John Smith",
+                        "email": "john.smith@example.com",
+                        "created_at": {
+                            "date": "2016-09-29 16:43:20.000000",
+                            "timezone_type": 3,
+                            "timezone": "UTC"
+                        }
+                    }
+                }
+            }
+
++ Response 401 (application/json)
+
+    + Attributes
+        + message: Failed to authenticate because of bad credentials or an invalid authorization header. (string, required) - Error message.
+        + status_code: 401 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+                "status_code": 401
+            }
+
++ Response 403 (application/json)
+
+    + Attributes
+        + message: Api key is not valid. (string, required) - Error message in case sent Api Key isn't valid.
+        + status_code: 403 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Api key is not valid.",
+                "status_code": 403
+            }
+
++ Response 500 (application/json)
+
+    + Attributes
+        + message: 500 Internal Server Error (string, required) - Error message.
+        + status_code: 500 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "500 Internal Server Error",
+                "status_code": 500
+            }
+
+# Todos [/v1/todos]
+Todos endpoints. User can list, request one, inster, update or delete todos for him.
+
+## List of todos [GET /v1/todos]
+Retreive a listing of the todos for current user.
+
++ Request (application/json)
+    + Headers
+
+            apikey: 442195b3-6389-4d8c-a283-4d1d7313d6da
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8
+
++ Response 200 (application/json)
+
+    + Attributes
+        + data (object, required) - List of all todos for the logged in user. NOTE THAT DATA PROPERTY IS AN ARRAY OF TODO OBJECTS.
+    + Body
+
+            {
+                "data": {
+                    "type": "todos",
+                    "id": "a207329e-6264-4960-a377-5b6dc8995d19",
+                    "attributes": {
+                        "content": "Ab quae quod consequatur itaque porro est corporis rerum. Deserunt quos ab cupiditate.",
+                        "is_active": false,
+                        "is_completed": false,
+                        "created_at": {
+                            "date": "2016-09-25 19:34:16.000000",
+                            "timezone_type": 3,
+                            "timezone": "UTC"
+                        },
+                        "updated_at": {
+                            "date": "2016-09-25 19:34:16.000000",
+                            "timezone_type": 3,
+                            "timezone": "UTC"
+                        }
+                    }
+                }
+            }
+
++ Response 401 (application/json)
+
+    + Attributes
+        + message: Failed to authenticate because of bad credentials or an invalid authorization header. (string, required) - Error message.
+        + status_code: 401 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+                "status_code": 401
+            }
+
++ Response 403 (application/json)
+
+    + Attributes
+        + message: Api key is not valid. (string, required) - Error message in case sent Api Key isn't valid.
+        + status_code: 403 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Api key is not valid.",
+                "status_code": 403
+            }
+
++ Response 404 (application/json)
+
+    + Attributes
+        + message: 404 Not Found. (string, required) - No todos were found.
+        + status_code: 404 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "404 Not Found.",
+                "status_code": 404
+            }
+
++ Response 500 (application/json)
+
+    + Attributes
+        + message: 500 Internal Server Error (string, required) - Error message.
+        + status_code: 500 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "500 Internal Server Error",
+                "status_code": 500
+            }
+
+## Create a todo [POST /v1/todos]
+Store a newly created todo in storage.
+
++ Request (application/json)
+    + Headers
+
+            apikey: 442195b3-6389-4d8c-a283-4d1d7313d6da
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8
+
+    + Attributes
+        + todo (object, required) - Todo object with set type, content, is_active and is_completed properties.
+    + Body
+
+            {
+                "todo": {
+                    "type": "todos",
+                    "attributes": {
+                        "content": "Lorem ipsum dolor sit amet.",
+                        "is_active": false,
+                        "is_completed": false
+                    }
+                }
+            }
+
++ Response 201 (application/json)
+    + Headers
+
+            Location: http://api.todoitk.dev/v1/todos/bf809138-8c0e-4cb5-b194-f649d7f4a1a5
+
+    + Attributes
+        + data (object, required) - Todo object for the created todo.
+    + Body
+
+            {
+                "data": {
+                    "type": "todos",
+                    "id": "bf809138-8c0e-4cb5-b194-f649d7f4a1a5",
+                    "attributes": {
+                        "content": "Lorem ipsum dolor sit amet.",
+                        "is_active": false,
+                        "is_completed": false,
+                        "created_at": {
+                            "date": "2016-09-29 18:08:37.000000",
+                            "timezone_type": 3,
+                            "timezone": "UTC"
+                        },
+                        "updated_at": {
+                            "date": "2016-09-29 18:08:37.000000",
+                            "timezone_type": 3,
+                            "timezone": "UTC"
+                        }
+                    }
+                }
+            }
+
++ Response 401 (application/json)
+
+    + Attributes
+        + message: Failed to authenticate because of bad credentials or an invalid authorization header. (string, required) - Error message.
+        + status_code: 401 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+                "status_code": 401
+            }
+
++ Response 403 (application/json)
+
+    + Attributes
+        + message: Api key is not valid. (string, required) - Error message in case sent Api Key isn't valid.
+        + status_code: 403 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Api key is not valid.",
+                "status_code": 403
+            }
+
++ Response 422 (application/json)
+
+    + Attributes
+        + message: 422 Unprocessable Entity (string, required) - Error message.
+        + errors (object, required) - Key value pairs of validation errors. Key represents a field name, and value is a validation error.
+        + status_code: 422 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "is_completed": "The is completed field is required."
+                },
+                "status_code": 422
+            }
+
++ Response 500 (application/json)
+
+    + Attributes
+        + message: 500 Internal Server Error (string, required) - Error message.
+        + status_code: 500 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "500 Internal Server Error",
+                "status_code": 500
+            }
+
+## Display the specified todo. [GET /v1/todos/{id}]
+Retreive a specified todo for current user.
+
++ Parameters
+    + id: `a207329e-6264-4960-a377-5b6dc8995d19` (string, required) - The id of the todo.
+
++ Request (application/json)
+    + Headers
+
+            apikey: 442195b3-6389-4d8c-a283-4d1d7313d6da
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8
+
++ Response 200 (application/json)
+
+    + Attributes
+        + data (object, required) - Todo object.
+    + Body
+
+            {
+                "data": {
+                    "type": "todos",
+                    "id": "a207329e-6264-4960-a377-5b6dc8995d19",
+                    "attributes": {
+                        "content": "Ab quae quod consequatur itaque porro est corporis rerum. Deserunt quos ab cupiditate.",
+                        "is_active": false,
+                        "is_completed": false,
+                        "created_at": {
+                            "date": "2016-09-25 19:34:16.000000",
+                            "timezone_type": 3,
+                            "timezone": "UTC"
+                        },
+                        "updated_at": {
+                            "date": "2016-09-25 19:34:16.000000",
+                            "timezone_type": 3,
+                            "timezone": "UTC"
+                        }
+                    }
+                }
+            }
+
++ Response 401 (application/json)
+
+    + Attributes
+        + message: Failed to authenticate because of bad credentials or an invalid authorization header. (string, required) - Error message.
+        + status_code: 401 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+                "status_code": 401
+            }
+
++ Response 403 (application/json)
+
+    + Attributes
+        + message: Api key is not valid. (string, required) - Error message in case sent Api Key isn't valid.
+        + status_code: 403 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Api key is not valid.",
+                "status_code": 403
+            }
+
++ Response 404 (application/json)
+
+    + Attributes
+        + message: 404 Not Found. (string, required) - No todos were found.
+        + status_code: 404 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "404 Not Found.",
+                "status_code": 404
+            }
+
++ Response 500 (application/json)
+
+    + Attributes
+        + message: 500 Internal Server Error (string, required) - Error message.
+        + status_code: 500 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "500 Internal Server Error",
+                "status_code": 500
+            }
+
+## Update todo [PUT /v1/todos/{id}]
+Update the specified resource in storage.
+
++ Parameters
+    + id: `a207329e-6264-4960-a377-5b6dc8995d19` (string, required) - The id of the todo.
+
++ Request (application/json)
+    + Headers
+
+            apikey: 442195b3-6389-4d8c-a283-4d1d7313d6da
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8
+
+    + Attributes
+        + todo (object, required) - Todo object with set type, and any of content, is_active and is_completed properties.
+    + Body
+
+            {
+                "todo": {
+                    "type": "todos",
+                    "attributes": {
+                        "content": "Lorem ipsum dolor sit amet.",
+                        "is_active": false,
+                        "is_completed": false
+                    }
+                }
+            }
+
++ Response 200 (application/json)
+    + Headers
+
+            Location: http://api.todoitk.dev/v1/todos/bf809138-8c0e-4cb5-b194-f649d7f4a1a5
+
+    + Attributes
+        + data (object, required) - Todo object for the created todo.
+    + Body
+
+            {
+                "data": {
+                    "type": "todos",
+                    "id": "bf809138-8c0e-4cb5-b194-f649d7f4a1a5",
+                    "attributes": {
+                        "content": "Lorem ipsum dolor sit amet.",
+                        "is_active": false,
+                        "is_completed": false,
+                        "created_at": {
+                            "date": "2016-09-29 18:08:37.000000",
+                            "timezone_type": 3,
+                            "timezone": "UTC"
+                        },
+                        "updated_at": {
+                            "date": "2016-09-29 18:08:37.000000",
+                            "timezone_type": 3,
+                            "timezone": "UTC"
+                        }
+                    }
+                }
+            }
+
++ Response 401 (application/json)
+
+    + Attributes
+        + message: Failed to authenticate because of bad credentials or an invalid authorization header. (string, required) - Error message.
+        + status_code: 401 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+                "status_code": 401
+            }
+
++ Response 403 (application/json)
+
+    + Attributes
+        + message: Api key is not valid. (string, required) - Error message in case sent Api Key isn't valid.
+        + status_code: 403 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Api key is not valid.",
+                "status_code": 403
+            }
+
++ Response 422 (application/json)
+
+    + Attributes
+        + message: 422 Unprocessable Entity (string, required) - Error message.
+        + errors (object, required) - Key value pairs of validation errors. Key represents a field name, and value is a validation error.
+        + status_code: 422 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "is_active": "The is active field must be true or false."
+                },
+                "status_code": 422
+            }
+
++ Response 500 (application/json)
+
+    + Attributes
+        + message: 500 Internal Server Error (string, required) - Error message.
+        + status_code: 500 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "500 Internal Server Error",
+                "status_code": 500
+            }
+
+## Remove todo [DELETE /v1/todos/{id}]
+Remove the specified todo from storage.
+
++ Parameters
+    + id: `a207329e-6264-4960-a377-5b6dc8995d19` (string, required) - The id of the todo.
+
++ Request (application/json)
+    + Headers
+
+            apikey: 442195b3-6389-4d8c-a283-4d1d7313d6da
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8
+
++ Response 204 (application/json)
+
++ Response 401 (application/json)
+
+    + Attributes
+        + message: Failed to authenticate because of bad credentials or an invalid authorization header. (string, required) - Error message.
+        + status_code: 401 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+                "status_code": 401
+            }
+
++ Response 403 (application/json)
+
+    + Attributes
+        + message: Api key is not valid. (string, required) - Error message in case sent Api Key isn't valid.
+        + status_code: 403 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Api key is not valid.",
+                "status_code": 403
+            }
+
++ Response 500 (application/json)
+
+    + Attributes
+        + message: 500 Internal Server Error (string, required) - Error message.
+        + status_code: 500 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "500 Internal Server Error",
+                "status_code": 500
+            }
+
+# Authentication [/v1]
+Authentication endpoints. User can login or register.
+
+## Login [POST /v1/login]
+Login user by sending his email and password in JSON format.
+
++ Request (application/json)
+    + Headers
+
+            apikey: 442195b3-6389-4d8c-a283-4d1d7313d6da
+
+    + Attributes
+        + email: john.smith@example.com (string, required) - User's email. Must be valid email.
+        + password: 123456789 (string, required) - User's password. Must be at least 8 characters long.
+    + Body
+
+            {
+                "email": "john.smith@example.com",
+                "password": "123456789"
+            }
+
++ Response 200 (application/json)
+
+    + Attributes
+        + token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8 (string, required) - Authorization JWT Token.
+    + Body
+
+            {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8"
+            }
+
++ Response 403 (application/json)
+
+    + Attributes
+        + message: Api key is not valid. (string, required) - Error message in case sent Api Key isn't valid.
+        + status_code: 403 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Api key is not valid.",
+                "status_code": 403
+            }
+
++ Response 404 (application/json)
+
+    + Attributes
+        + message: 404 Not Found (string, required) - Error message.
+        + status_code: 404 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "404 Not Found",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+
+    + Attributes
+        + message: 422 Unprocessable Entity (string, required) - Error message.
+        + errors (object, required) - Key value pairs of validation errors. Key represents a field name, and value is a validation error.
+        + status_code: 422 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "password": "The password must be at least 8 characters."
+                },
+                "status_code": 422
+            }
+
++ Response 500 (application/json)
+
+    + Attributes
+        + message: 500 Internal Server Error (string, required) - Error message.
+        + status_code: 500 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "500 Internal Server Error",
+                "status_code": 500
+            }
+
+## Register [POST /v1/register]
+Register user by sending his name, email and password in JSON format.
+
++ Request (application/json)
+    + Headers
+
+            apikey: 442195b3-6389-4d8c-a283-4d1d7313d6da
+
+    + Attributes
+        + name: John Smith (string, required) - User's name.
+        + email: john.smith@example.com (string, required) - User's email. Must be valid email.
+        + password: 123456789 (string, required) - User's password. Must be at least 8 characters long.
+    + Body
+
+            {
+                "name": "John Smith",
+                "email": "john.smith@example.com",
+                "password": "123456789"
+            }
+
++ Response 201 (application/json)
+    + Headers
+
+            Location: http://api.todoitk.dev/v1/users/me
+    + Body
+
+            {
+                "data": {
+                    "type": "users",
+                    "id": "69c66dbc-16f1-4aca-8f5b-67258d9f4d71",
+                    "attributes": {
+                        "name": "John Smith",
+                        "email": "john.smit1h@example.com",
+                        "created_at": {
+                            "date": "2016-09-29 16:45:30.000000",
+                            "timezone_type": 3,
+                            "timezone": "UTC"
+                        }
+                    }
+                }
+            }
+
++ Response 403 (application/json)
+
+    + Attributes
+        + message: Api key is not valid. (string, required) - Error message in case sent Api Key isn't valid.
+        + status_code: 403 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "Api key is not valid.",
+                "status_code": 403
+            }
+
++ Response 422 (application/json)
+
+    + Attributes
+        + message: 422 Unprocessable Entity (string, required) - Error message.
+        + errors (object, required) - Key value pairs of validation errors. Key represents a field name, and value is a validation error.
+        + status_code: 422 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "email": "The email has already been taken."
+                },
+                "status_code": 422
+            }
+
++ Response 500 (application/json)
+
+    + Attributes
+        + message: 500 Internal Server Error (string, required) - Error message.
+        + status_code: 500 (number, required) - HTTP Status Code.
+    + Body
+
+            {
+                "message": "500 Internal Server Error",
+                "status_code": 500
+            }

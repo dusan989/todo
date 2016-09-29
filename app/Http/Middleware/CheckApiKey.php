@@ -23,7 +23,7 @@ class CheckApiKey
      *
      * @var string
      */
-    private $notValidMessage = 'Api key is not valid!';
+    private $notValidMessage = 'Api key is not valid.';
 
     /**
      * Handle an incoming request.

@@ -19,6 +19,7 @@ $api->version('v1', [
     'middleware' => [
         'api.throttle',
         'cors',
+        'checkApiKey',
     ],
     'limit' => 1000,
     'expires' => 5,
