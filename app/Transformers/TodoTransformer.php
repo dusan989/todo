@@ -7,6 +7,13 @@ use TodoApi\Models\Todo;
 
 class TodoTransformer extends TransformerAbstract
 {
+    /**
+     * Transform Todo Model into array
+     *
+     * @param  Todo   $todo
+     *
+     * @return array
+     */
     public function transform(Todo $todo)
     {
         return [

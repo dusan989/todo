@@ -1,0 +1,19 @@
+#%RAML 1.0 Library
+traits:
+  ApiKey:
+    headers:
+      apikey:
+        type: string
+        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+        example: f4e68c61-9075-4512-b566-34be6501eef9
+        required: true
+        displayName: apikey
+        description: API Key used to authenticate used App.
+  Authorization:
+    headers:
+      Authorization:
+        required: true
+        displayName: Authorization
+        type: string
+        description: Authorization Header in the format "Bearer {JWT TOKEN}".
+        example: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc1MzI1NDQ3LCJleHAiOjE0NzUzMjkwNDcsIm5iZiI6MTQ3NTMyNTQ0NywianRpIjoiZGFlOTJlNzQ5NmJiODg0ODYxZGRlMWZlYzM0ZmJmYzMifQ.WslK5UknPQoB6ceWOQ8YUsXuBvo1EVZgnU__HImdGps

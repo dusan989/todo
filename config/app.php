@@ -178,7 +178,6 @@ return [
         TodoApi\Providers\EventServiceProvider::class,
         TodoApi\Providers\RouteServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
-        TodoApi\Providers\FractalServiceProvider::class,
         Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,

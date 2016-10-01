@@ -1,0 +1,343 @@
+#%RAML 1.0
+title: TODO
+baseUri: http://api.todo.dev/v1
+mediaType:
+  - application/json
+protocols:
+  - HTTP
+version: v1
+description: This is the simle implementation of the TODO API using Laravel 5.3 and Dingo library.
+uses:
+  Errors: types/error.raml
+  Users: types/user.raml
+  Todos: types/todo.raml
+  ResponseTraits: traits/responses.raml
+  Uuid: types/uuid.raml
+  Headers: traits/headers.raml
+/login:
+  post:
+    displayName: Login
+    description: Login user by sending his email and password in JSON format.
+    is: [
+      ResponseTraits.Response403,
+      ResponseTraits.Response404,
+      ResponseTraits.Response500,
+      Headers.ApiKey
+    ]
+    body:
+      application/json:
+        properties:
+          email:
+            description: Unique email of user.
+            displayName: Email
+            required: true
+            type: string
+          password:
+            description: Password of user.
+            displayName: Password
+            required: true
+            type: string
+        example:
+          email: john.smith@example.com
+          password: password123
+    responses:
+      200:
+        description: User is logged in successfully.
+        body:
+          application/json:
+            properties:
+              data:
+                required: true
+                type: object
+                properties:
+                  token:
+                    description: JWT Token that should be added to Authorization header for all other requests.
+                    displayName: JWT Token
+                    required: true
+                    type: string
+            example:
+              data:
+                token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8
+/register:
+  post:
+    displayName: Register
+    description: Register user by sending his name, email and password in JSON format.
+    is: [
+      ResponseTraits.Response403,
+      ResponseTraits.Response500,
+      Headers.ApiKey
+    ]
+    body:
+      application/json:
+        properties:
+          name:
+            displayName: Name
+            description: Name of the user.
+            required: true
+            type: string
+          email:
+            displayName: Email
+            description: Email of user. Must be unique.
+            required: true
+            type: string
+          password:
+            displayName: Password
+            description: Password of user.
+            minLength: 8
+            required: true
+            type: string
+        example:
+          name: John Smith
+          email: john.smith@example.com
+          password: password123
+    responses:
+      201:
+        description: User has been registered successfully.
+        body:
+          application/json:
+            properties:
+              data:
+                required: true
+                type: Users.User
+            example:
+              data:
+                id: 442195b3-6389-4d8c-a283-4d1d7313d6da
+                name: John Smith
+                email: john.smith@example.com
+                created_at:
+                  date: 2016-10-01 11:38:24.000000
+                  timezone_type: 3
+                  timezone: UTC
+      422:
+        description: Response in case of a validation error.
+        body:
+          application/json:
+            type: Errors.ValidationError
+            example:
+              message: 422 Unprocessable Entity
+              errors:
+                password:
+                  - The password must be at least 8 characters.
+              status_code: 422
+/users:
+  is: [
+    ResponseTraits.Response403,
+    ResponseTraits.Response401,
+    ResponseTraits.Response500,
+    Headers.ApiKey,
+    Headers.Authorization
+  ]
+  /me:
+    is: [
+      ResponseTraits.Response403,
+      ResponseTraits.Response401,
+      ResponseTraits.Response500,
+      Headers.ApiKey,
+      Headers.Authorization
+    ]
+    get:
+      displayName: Get current user
+      description: Get info about current user.
+      responses:
+        200:
+          description: Uset info has been fetched successfully.
+          body:
+            properties:
+              data:
+                required: true
+                type: Users.User
+            example:
+              data:
+                id: 442195b3-6389-4d8c-a283-4d1d7313d6da
+                name: John Smith
+                email: john.smith@example.com
+                created_at:
+                  date: 2016-10-01 11:38:24.000000
+                  timezone_type: 3
+                  timezone: UTC
+/todos:
+  is: [
+    ResponseTraits.Response403,
+    ResponseTraits.Response401,
+    ResponseTraits.Response500,
+    Headers.ApiKey,
+    Headers.Authorization
+  ]
+  get:
+    displayName: Get todos
+    description: Retreive a listing of the todos for current user.
+    responses:
+      200:
+        description: Todos are fetched successfully.
+        body:
+          application/json:
+            properties:
+              data:
+                required: true
+                type: Todos.Todo[]
+                description: In case, no todos were found, empty array is returned.
+            example:
+              data:
+                -
+                  id: a207329e-6264-4960-a377-5b6dc8995d19
+                  content: Ab quae quod consequatur itaque porro est corporis rerum. Deserunt quos ab cupiditate.
+                  is_active: false
+                  is_completed: false
+                  created_at:
+                    date: 2016-10-01 09:31:30.000000
+                    timezone_type: 3
+                    timezone: UTC
+                  updated_at:
+                    date: 2016-10-01 09:31:30.000000
+                    timezone_type: 3
+                    timezone: UTC
+                -
+                  id: 26225fbc-d939-47c0-bfdf-22497412e577
+                  content: Laudantium et ea consequuntur animi atque. Distinctio reiciendis omnis odio.
+                  is_active: true
+                  is_completed: false
+                  created_at:
+                    date: 2016-10-01 09:31:45.000000
+                    timezone_type: 3
+                    timezone: UTC
+                  updated_at:
+                    date: 2016-10-01 09:31:45.000000
+                    timezone_type: 3
+                    timezone: UTC
+  post:
+    displayName: Store todo
+    description: Store a newly created todo in storage.
+    body:
+      application/json:
+        type: Todos.TodoClient
+        example:
+          content: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, quidem.
+          is_active: false
+          is_completed: false
+    responses:
+      201:
+        description: Todo has been saved successfully.
+        body:
+          application/json:
+            properties:
+              data:
+                required: true
+                type: Todos.Todo
+            example:
+              data:
+                id: a207329e-6264-4960-a377-5b6dc8995d19
+                content: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, quidem.
+                is_active: false
+                is_completed: false
+                created_at:
+                  date: 2016-10-01 09:31:30.000000
+                  timezone_type: 3
+                  timezone: UTC
+                updated_at:
+                  date: 2016-10-01 09:31:30.000000
+                  timezone_type: 3
+                  timezone: UTC
+      422:
+        description: Response in case of a validation error.
+        body:
+          application/json:
+            type: Errors.ValidationError
+            example:
+              message: 422 Unprocessable Entity
+              errors:
+                is_active:
+                  - The is active field must be true or false.
+              status_code: 422
+  /{uuid}:
+    is: [
+      ResponseTraits.Response403,
+      ResponseTraits.Response401,
+      ResponseTraits.Response500,
+      Headers.ApiKey,
+      Headers.Authorization
+    ]
+    uriParameters:
+      uuid:
+        type: Uuid.Uuid
+        description: UUID of requested todo
+        required: true
+        example: 442195b3-6389-4d8c-a283-4d1d7313d6da
+    get:
+      displayName: Get todo by UUID
+      description: Retreive a specified todo for current user.
+      responses:
+        200:
+          description: Todo has been successfully fetched.
+          body:
+            application/json:
+              properties:
+                data:
+                  required: true
+                  type: Todos.Todo
+                  description: In case, no todo was found, data will be null.
+              example:
+                data:
+                  id: a207329e-6264-4960-a377-5b6dc8995d19
+                  content: Ab quae quod consequatur itaque porro est corporis rerum. Deserunt quos ab cupiditate.
+                  is_active: false
+                  is_completed: false
+                  created_at:
+                    date: 2016-10-01 09:31:30.000000
+                    timezone_type: 3
+                    timezone: UTC
+                  updated_at:
+                    date: 2016-10-01 09:31:30.000000
+                    timezone_type: 3
+                    timezone: UTC
+    put:
+      displayName: Update todo
+      description: Update the specified resource in storage.
+      is: [ ResponseTraits.Response404 ]
+      body:
+        application/json:
+          type: Todos.TodoClientUpdate
+          example:
+            is_active: true
+      responses:
+        200:
+          description: Todo has been successfully updated.
+          body:
+            application/json:
+              properties:
+                data:
+                  required: true
+                  type: Todos.Todo
+              example:
+                data:
+                  id: a207329e-6264-4960-a377-5b6dc8995d19
+                  content: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, quidem.
+                  is_active: false
+                  is_completed: true
+                  created_at:
+                    date: 2016-10-01 09:31:30.000000
+                    timezone_type: 3
+                    timezone: UTC
+                  updated_at:
+                    date: 2016-10-01 10:31:30.000000
+                    timezone_type: 3
+                    timezone: UTC
+        422:
+          description: Response in case of a validation error.
+          body:
+            application/json:
+              type: Errors.ValidationError
+              example:
+                message: 422 Unprocessable Entity
+                errors:
+                  is_active:
+                    - The is active field must be true or false.
+                status_code: 422
+    delete:
+      displayName: Delete todo
+      description: Remove the specified todo from storage.
+      is: [ ResponseTraits.Response404 ]
+      responses:
+        204:
+          description: Todo has been successfully removed.
+          body:
+            application/json:

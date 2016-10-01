@@ -1,0 +1,44 @@
+#%RAML 1.0 Library
+uses:
+  Errors: ../types/error.raml
+traits:
+  Response401:
+    responses:
+      401:
+        description: Response in case Authorization header is missing or invalid.
+        body:
+          application/json:
+            type: Errors.Error
+            example:
+              message: Failed to authenticate because of bad credentials or an invalid authorization header.
+              status_code: 401
+  Response403:
+    responses:
+      403:
+        description: Response in case apikey header was not sent or is not valid.
+        body:
+          application/json:
+            type: Errors.Error
+            example:
+              message: Api key is not valid.
+              status_code: 403
+  Response404:
+    responses:
+      404:
+        description: Response in case requested resource doesn't exists.
+        body:
+          application/json:
+            type: Errors.Error
+            example:
+              message: 404 Not Found
+              status_code: 404
+  Response500:
+    responses:
+      500:
+        description: Response in case of a server-side error.
+        body:
+          application/json:
+            type: Errors.Error
+            example:
+              message: 500 Internal Server Error
+              status_code: 500

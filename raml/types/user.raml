@@ -1,0 +1,41 @@
+#%RAML 1.0 Library
+uses:
+  Uuid: uuid.raml
+types:
+  User:
+    type: object
+    properties:
+      id:
+        required: true
+        displayName: UUID
+        type: Uuid.Uuid
+      name:
+        required: true
+        displayName: Name
+        type: string
+        example: John Smith
+      email:
+        type: string
+        displayName: Email
+        example: john.smith@example.com
+        required: true
+      created_at:
+        required: true
+        displayName: Created at
+        type: object
+        properties:
+          date:
+            required: true
+            displayName: Date
+            type: string
+            example: 2016-10-01 11:38:24.000000
+          timezone_type:
+            required: true
+            displayName: Timezone type
+            type: integer
+            example: 3
+          timezone:
+            type: string
+            displayName: Timezone
+            example: UTC
+            required: true

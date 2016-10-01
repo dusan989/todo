@@ -1,1131 +1,378 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>TODO ITK</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:black;background:white;font:400 14px / 1.42 'Roboto',Helvetica,sans-serif}header{border-bottom:1px solid #f2f2f2;margin-bottom:12px}h1,h2,h3,h4,h5{color:black;margin:12px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:36px}h2{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:30px}h3{font-size:100%;text-transform:uppercase}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#428bca;text-decoration:none}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:6px;margin:12px auto;background-image:linear-gradient(to right, rgba(0,0,0,0) 20%, rgba(0,0,0,0.2) 51.4%, rgba(255,255,255,0.2) 51.4%, rgba(255,255,255,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(0,0,0,0.5);font-size:15.5px;padding:10px 20px;margin:12px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:12px;border:1px solid #cfcfcf;border-radius:6px;overflow:auto}pre code{color:black;background-color:transparent;padding:0;border:none}code{color:#444;background-color:#f5f5f5;font:'Inconsolata',monospace;padding:1px 4px;border:1px solid #cfcfcf;border-radius:3px}ul,ol{padding-left:2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:12px}table tr:nth-child(2n){background-color:#fafafa}table th,table td{padding:6px 12px;border:1px solid #e6e6e6}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:200 36px 'Raleway',Helvetica,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:black;background-color:#f0f6fb;border-left:4px solid #428bca}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#428bca}.warning{color:black;background-color:#fbf1f0;border-left:4px solid #c9302c}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#c9302c}header{margin-top:24px}nav{position:fixed;top:24px;bottom:0;overflow-y:auto}nav .resource-group{padding:0}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:12px;right:12px;opacity:.5}nav .resource-group .heading a{display:block;color:black;opacity:.7;border-left:2px solid transparent;margin:0}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:rgba(0,0,0,0.7);padding:8px 12px;border-top:1px solid #d9d9d9;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-12px}nav ul>li:last-child{margin-bottom:-12px}nav ul ul a{padding-left:24px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:right;min-width:10px;min-height:14px;padding:3px 7px;font-size:12px;color:#000;background-color:#f2f2f2;border-radius:10px;margin:-2px 0}.badge.get{color:#70bbe1;background-color:#d9edf7}.badge.head{color:#70bbe1;background-color:#d9edf7}.badge.options{color:#70bbe1;background-color:#d9edf7}.badge.put{color:#f0db70;background-color:#fcf8e3}.badge.patch{color:#f0db70;background-color:#fcf8e3}.badge.post{color:#93cd7c;background-color:#dff0d8}.badge.delete{color:#ce8383;background-color:#f2dede}.collapse-button{float:right}.collapse-button .close{display:none;color:#428bca;cursor:pointer}.collapse-button .open{color:#428bca;cursor:pointer}.collapse-button.show .close{display:inline}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:244px;width:696px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:24px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:12px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:12px}.right a{color:#428bca}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:white}.right pre{background-color:#1d1f21;border:1px solid #1d1f21}.right pre code{color:#c5c8c6}.right .description{margin-top:12px}.triple .resource-heading{font-size:125%}.definition{margin-top:12px;margin-bottom:12px}.definition .method{font-weight:bold}.definition .method.get{color:#2e8ab8}.definition .method.head{color:#2e8ab8}.definition .method.options{color:#2e8ab8}.definition .method.post{color:#56b82e}.definition .method.put{color:#b8a22e}.definition .method.patch{color:#b8a22e}.definition .method.delete{color:#b82e2e}.definition .uri{word-break:break-all;word-wrap:break-word}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:12px;border-radius:6px}.example-names .tab-button{cursor:pointer;color:black;border:1px solid #ddd;padding:6px;margin-left:12px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#444}.right .example-names .tab-button{color:white;border:1px solid #666;border-radius:6px}.right .example-names .tab-button.active{background-color:#5e5e5e}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:14.4px;background-color:#fbfbfb;border-right:1px solid #f0f0f0;z-index:-1}#right-panel-background{position:absolute;right:-12px;top:-12px;bottom:-12px;width:48.6%;background-color:#333;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:224px;width:606px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:194px;width:526px}}@media (max-width:768px){nav{display:none}.container{width:95%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:95%}#nav-background{display:none}#right-panel-background{width:48.6%}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(0,0,0,0.5);background-color:#f2f2f2;text-decoration:none !important;border-top:1px solid #d9d9d9;border-left:1px solid #d9d9d9;border-right:1px solid #d9d9d9;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:12px;margin-bottom:12px;background-color:white;border:1px solid #d9d9d9;border-radius:6px}.resource-group h2.group-heading,.resource-group .heading a{padding:12px;margin:-12px -12px 12px -12px;background-color:#f2f2f2;border-bottom:1px solid #d9d9d9;border-top-left-radius:6px;border-top-right-radius:6px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 12px 0;border:1px solid #d9d9d9}nav .resource-group .heading a{padding:12px;margin-bottom:0}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:12px;padding:12px 12px 0 12px;overflow:hidden;border:1px solid transparent;border-radius:6px}.action h4.action-heading{padding:6px 12px;margin:-12px -12px 12px -12px;border-bottom:1px solid transparent;border-top-left-radius:6px;border-top-right-radius:6px;overflow:hidden}.action h4.action-heading .name{float:right;font-weight:normal;padding:6px 0}.action h4.action-heading .method{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block}.action h4.action-heading .method.get{color:#000;background-color:#337ab7}.action h4.action-heading .method.head{color:#000;background-color:#337ab7}.action h4.action-heading .method.options{color:#000;background-color:#337ab7}.action h4.action-heading .method.put{color:#000;background-color:#ed9c28}.action h4.action-heading .method.patch{color:#000;background-color:#ed9c28}.action h4.action-heading .method.post{color:#000;background-color:#5cb85c}.action h4.action-heading .method.delete{color:#000;background-color:#d9534f}.action h4.action-heading code{color:#444;background-color:#f5f5f5;border-color:#cfcfcf;font-weight:normal;word-break:break-all;display:inline-block;margin-top:2px}.action dl.inner{padding-bottom:2px}.action .title{border-bottom:1px solid white;margin:0 -12px -1px -12px;padding:12px}.action.get{border-color:#bce8f1}.action.get h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.head{border-color:#bce8f1}.action.head h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.options{border-color:#bce8f1}.action.options h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.post{border-color:#d6e9c6}.action.post h4.action-heading{color:#5cb85c;background:#dff0d8;border-bottom-color:#d6e9c6}.action.put{border-color:#faebcc}.action.put h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.patch{border-color:#faebcc}.action.patch h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.delete{border-color:#ebccd1}.action.delete h4.action-heading{color:#d9534f;background:#f2dede;border-bottom-color:#ebccd1}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#">Resource Group</a></div><div class="collapse-content"><ul><li><a href="#users-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Me</a></li><li><a href="#todos">Todos</a><ul><li><a href="#todos-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>List of todos</a></li><li><a href="#todos-post"><span class="badge post"><i class="fa fa-plus"></i></span>Create a todo</a></li><li><a href="#todos-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Display the specified todo.</a></li><li><a href="#todos-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Update todo</a></li><li><a href="#todos-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Remove todo</a></li></ul></li><li><a href="#authentication">Authentication</a><ul><li><a href="#authentication-post"><span class="badge post"><i class="fa fa-plus"></i></span>Login</a></li><li><a href="#authentication-post-1"><span class="badge post"><i class="fa fa-plus"></i></span>Register</a></li></ul></li></ul></div></div></nav><div class="content"><header><h1 id="top">TODO ITK</h1></header><section id="" class="resource-group"><h2 class="group-heading">Resource Group <a href="#" class="permalink">&para;</a></h2><div id="users" class="resource"><h3 class="resource-heading">Users <a href="#users" class="permalink">&nbsp;&para;</a></h3><p>Users endpoints. User can receive data about him.</p>
-<div id="users-get" class="action get"><h4 class="action-heading"><div class="name">Me</div><a href="#users-get" class="method get">GET</a><code class="uri">/v1/users/me</code></h4><p>Get info about current user.</p>
-<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/v1/users/me</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">apikey</span>: <span class="hljs-string">442195b3-6389-4d8c-a283-4d1d7313d6da</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"users"</span></span>,
-    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"cbbae68f-55bd-4dd3-8264-c367ce7d8446"</span></span>,
-    "<span class="hljs-attribute">attributes</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Smith"</span></span>,
-      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"john.smith@example.com"</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2016-09-29 16:43:20.000000"</span></span>,
-        "<span class="hljs-attribute">timezone_type</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">timezone</span>": <span class="hljs-value"><span class="hljs-string">"UTC"</span>
-      </span>}
-    </span>}
-  </span>}
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Users data object."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"data"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Failed to authenticate because of bad credentials or an invalid authorization header."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">401</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>403</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Api key is not valid."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">403</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message in case sent Api Key isn't valid."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>500</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"500 Internal Server Error"</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">500</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="todos" class="resource"><h3 class="resource-heading">Todos <a href="#todos" class="permalink">&nbsp;&para;</a></h3><p>Todos endpoints. User can list, request one, inster, update or delete todos for him.</p>
-<div id="todos-get" class="action get"><h4 class="action-heading"><div class="name">List of todos</div><a href="#todos-get" class="method get">GET</a><code class="uri">/v1/todos</code></h4><p>Retreive a listing of the todos for current user.</p>
-<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/v1/todos</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">apikey</span>: <span class="hljs-string">442195b3-6389-4d8c-a283-4d1d7313d6da</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"todos"</span></span>,
-    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"a207329e-6264-4960-a377-5b6dc8995d19"</span></span>,
-    "<span class="hljs-attribute">attributes</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">content</span>": <span class="hljs-value"><span class="hljs-string">"Ab quae quod consequatur itaque porro est corporis rerum. Deserunt quos ab cupiditate."</span></span>,
-      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">is_completed</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2016-09-25 19:34:16.000000"</span></span>,
-        "<span class="hljs-attribute">timezone_type</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">timezone</span>": <span class="hljs-value"><span class="hljs-string">"UTC"</span>
-      </span>}</span>,
-      "<span class="hljs-attribute">updated_at</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2016-09-25 19:34:16.000000"</span></span>,
-        "<span class="hljs-attribute">timezone_type</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">timezone</span>": <span class="hljs-value"><span class="hljs-string">"UTC"</span>
-      </span>}
-    </span>}
-  </span>}
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"List of all todos for the logged in user. NOTE THAT DATA PROPERTY IS AN ARRAY OF TODO OBJECTS."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"data"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Failed to authenticate because of bad credentials or an invalid authorization header."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">401</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>403</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Api key is not valid."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">403</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message in case sent Api Key isn't valid."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"404 Not Found."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">404</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"No todos were found."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>500</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"500 Internal Server Error"</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">500</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="todos-post" class="action post"><h4 class="action-heading"><div class="name">Create a todo</div><a href="#todos-post" class="method post">POST</a><code class="uri">/v1/todos</code></h4><p>Store a newly created todo in storage.</p>
-<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/v1/todos</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">apikey</span>: <span class="hljs-string">442195b3-6389-4d8c-a283-4d1d7313d6da</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">todo</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"todos"</span></span>,
-    "<span class="hljs-attribute">attributes</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">content</span>": <span class="hljs-value"><span class="hljs-string">"Lorem ipsum dolor sit amet."</span></span>,
-      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">is_completed</span>": <span class="hljs-value"><span class="hljs-literal">false</span>
-    </span>}
-  </span>}
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">todo</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Todo object with set type, content, is_active and is_completed properties."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"todo"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>201</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Location</span>: <span class="hljs-string">http://api.todoitk.dev/v1/todos/bf809138-8c0e-4cb5-b194-f649d7f4a1a5</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"todos"</span></span>,
-    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"bf809138-8c0e-4cb5-b194-f649d7f4a1a5"</span></span>,
-    "<span class="hljs-attribute">attributes</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">content</span>": <span class="hljs-value"><span class="hljs-string">"Lorem ipsum dolor sit amet."</span></span>,
-      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">is_completed</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2016-09-29 18:08:37.000000"</span></span>,
-        "<span class="hljs-attribute">timezone_type</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">timezone</span>": <span class="hljs-value"><span class="hljs-string">"UTC"</span>
-      </span>}</span>,
-      "<span class="hljs-attribute">updated_at</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2016-09-29 18:08:37.000000"</span></span>,
-        "<span class="hljs-attribute">timezone_type</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">timezone</span>": <span class="hljs-value"><span class="hljs-string">"UTC"</span>
-      </span>}
-    </span>}
-  </span>}
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Todo object for the created todo."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"data"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Failed to authenticate because of bad credentials or an invalid authorization header."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">401</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>403</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Api key is not valid."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">403</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message in case sent Api Key isn't valid."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>422</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"422 Unprocessable Entity"</span></span>,
-  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">is_completed</span>": <span class="hljs-value"><span class="hljs-string">"The is completed field is required."</span>
-  </span>}</span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">422</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Key value pairs of validation errors. Key represents a field name, and value is a validation error."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"errors"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>500</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"500 Internal Server Error"</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">500</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="todos-get-1" class="action get"><h4 class="action-heading"><div class="name">Display the specified todo.</div><a href="#todos-get-1" class="method get">GET</a><code class="uri">/v1/todos/{id}</code></h4><p>Retreive a specified todo for current user.</p>
-<h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/v1/todos/<span class="hljs-attribute" title="id">a207329e-6264-4960-a377-5b6dc8995d19</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>a207329e-6264-4960-a377-5b6dc8995d19</span></span><p>The id of the todo.</p>
-</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">apikey</span>: <span class="hljs-string">442195b3-6389-4d8c-a283-4d1d7313d6da</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"todos"</span></span>,
-    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"a207329e-6264-4960-a377-5b6dc8995d19"</span></span>,
-    "<span class="hljs-attribute">attributes</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">content</span>": <span class="hljs-value"><span class="hljs-string">"Ab quae quod consequatur itaque porro est corporis rerum. Deserunt quos ab cupiditate."</span></span>,
-      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">is_completed</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2016-09-25 19:34:16.000000"</span></span>,
-        "<span class="hljs-attribute">timezone_type</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">timezone</span>": <span class="hljs-value"><span class="hljs-string">"UTC"</span>
-      </span>}</span>,
-      "<span class="hljs-attribute">updated_at</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2016-09-25 19:34:16.000000"</span></span>,
-        "<span class="hljs-attribute">timezone_type</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">timezone</span>": <span class="hljs-value"><span class="hljs-string">"UTC"</span>
-      </span>}
-    </span>}
-  </span>}
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Todo object."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"data"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Failed to authenticate because of bad credentials or an invalid authorization header."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">401</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>403</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Api key is not valid."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">403</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message in case sent Api Key isn't valid."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"404 Not Found."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">404</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"No todos were found."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>500</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"500 Internal Server Error"</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">500</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="todos-put" class="action put"><h4 class="action-heading"><div class="name">Update todo</div><a href="#todos-put" class="method put">PUT</a><code class="uri">/v1/todos/{id}</code></h4><p>Update the specified resource in storage.</p>
-<h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/v1/todos/<span class="hljs-attribute" title="id">a207329e-6264-4960-a377-5b6dc8995d19</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>a207329e-6264-4960-a377-5b6dc8995d19</span></span><p>The id of the todo.</p>
-</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">apikey</span>: <span class="hljs-string">442195b3-6389-4d8c-a283-4d1d7313d6da</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">todo</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"todos"</span></span>,
-    "<span class="hljs-attribute">attributes</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">content</span>": <span class="hljs-value"><span class="hljs-string">"Lorem ipsum dolor sit amet."</span></span>,
-      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">is_completed</span>": <span class="hljs-value"><span class="hljs-literal">false</span>
-    </span>}
-  </span>}
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">todo</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Todo object with set type, and any of content, is_active and is_completed properties."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"todo"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Location</span>: <span class="hljs-string">http://api.todoitk.dev/v1/todos/bf809138-8c0e-4cb5-b194-f649d7f4a1a5</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"todos"</span></span>,
-    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"bf809138-8c0e-4cb5-b194-f649d7f4a1a5"</span></span>,
-    "<span class="hljs-attribute">attributes</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">content</span>": <span class="hljs-value"><span class="hljs-string">"Lorem ipsum dolor sit amet."</span></span>,
-      "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">is_completed</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2016-09-29 18:08:37.000000"</span></span>,
-        "<span class="hljs-attribute">timezone_type</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">timezone</span>": <span class="hljs-value"><span class="hljs-string">"UTC"</span>
-      </span>}</span>,
-      "<span class="hljs-attribute">updated_at</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2016-09-29 18:08:37.000000"</span></span>,
-        "<span class="hljs-attribute">timezone_type</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">timezone</span>": <span class="hljs-value"><span class="hljs-string">"UTC"</span>
-      </span>}
-    </span>}
-  </span>}
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Todo object for the created todo."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"data"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Failed to authenticate because of bad credentials or an invalid authorization header."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">401</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>403</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Api key is not valid."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">403</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message in case sent Api Key isn't valid."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>422</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"422 Unprocessable Entity"</span></span>,
-  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">is_active</span>": <span class="hljs-value"><span class="hljs-string">"The is active field must be true or false."</span>
-  </span>}</span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">422</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Key value pairs of validation errors. Key represents a field name, and value is a validation error."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"errors"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>500</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"500 Internal Server Error"</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">500</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="todos-delete" class="action delete"><h4 class="action-heading"><div class="name">Remove todo</div><a href="#todos-delete" class="method delete">DELETE</a><code class="uri">/v1/todos/{id}</code></h4><p>Remove the specified todo from storage.</p>
-<h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/v1/todos/<span class="hljs-attribute" title="id">a207329e-6264-4960-a377-5b6dc8995d19</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>string</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>a207329e-6264-4960-a377-5b6dc8995d19</span></span><p>The id of the todo.</p>
-</dd></dl></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">apikey</span>: <span class="hljs-string">442195b3-6389-4d8c-a283-4d1d7313d6da</span><br><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>204</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>401</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Failed to authenticate because of bad credentials or an invalid authorization header."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">401</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>403</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Api key is not valid."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">403</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message in case sent Api Key isn't valid."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>500</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"500 Internal Server Error"</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">500</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div><div id="authentication" class="resource"><h3 class="resource-heading">Authentication <a href="#authentication" class="permalink">&nbsp;&para;</a></h3><p>Authentication endpoints. User can login or register.</p>
-<div id="authentication-post" class="action post"><h4 class="action-heading"><div class="name">Login</div><a href="#authentication-post" class="method post">POST</a><code class="uri">/v1/login</code></h4><p>Login user by sending his email and password in JSON format.</p>
-<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/v1/login</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">apikey</span>: <span class="hljs-string">442195b3-6389-4d8c-a283-4d1d7313d6da</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"john.smith@example.com"</span></span>,
-  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"123456789"</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"User's email. Must be valid email."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">password</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"User's password. Must be at least 8 characters long."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"email"</span>,
-    <span class="hljs-string">"password"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">token</span>": <span class="hljs-value"><span class="hljs-string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8"</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">token</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Authorization JWT Token."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"token"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>403</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Api key is not valid."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">403</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message in case sent Api Key isn't valid."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"404 Not Found"</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">404</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>422</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"422 Unprocessable Entity"</span></span>,
-  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"The password must be at least 8 characters."</span>
-  </span>}</span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">422</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Key value pairs of validation errors. Key represents a field name, and value is a validation error."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"errors"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>500</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"500 Internal Server Error"</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">500</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="authentication-post-1" class="action post"><h4 class="action-heading"><div class="name">Register</div><a href="#authentication-post-1" class="method post">POST</a><code class="uri">/v1/register</code></h4><p>Register user by sending his name, email and password in JSON format.</p>
-<h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/v1/register</span></div><div class="title"><strong>Request</strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">apikey</span>: <span class="hljs-string">442195b3-6389-4d8c-a283-4d1d7313d6da</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Smith"</span></span>,
-  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"john.smith@example.com"</span></span>,
-  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"123456789"</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">name</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"User's name."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">email</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"User's email. Must be valid email."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">password</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"User's password. Must be at least 8 characters long."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"name"</span>,
-    <span class="hljs-string">"email"</span>,
-    <span class="hljs-string">"password"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>201</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Location</span>: <span class="hljs-string">http://api.todoitk.dev/v1/users/me</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"users"</span></span>,
-    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"69c66dbc-16f1-4aca-8f5b-67258d9f4d71"</span></span>,
-    "<span class="hljs-attribute">attributes</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"John Smith"</span></span>,
-      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"john.smit1h@example.com"</span></span>,
-      "<span class="hljs-attribute">created_at</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">date</span>": <span class="hljs-value"><span class="hljs-string">"2016-09-29 16:45:30.000000"</span></span>,
-        "<span class="hljs-attribute">timezone_type</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>,
-        "<span class="hljs-attribute">timezone</span>": <span class="hljs-value"><span class="hljs-string">"UTC"</span>
-      </span>}
-    </span>}
-  </span>}
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>403</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Api key is not valid."</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">403</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message in case sent Api Key isn't valid."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>422</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"422 Unprocessable Entity"</span></span>,
-  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"The email has already been taken."</span>
-  </span>}</span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">422</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-      "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{}</span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Key value pairs of validation errors. Key represents a field name, and value is a validation error."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"errors"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>500</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"500 Internal Server Error"</span></span>,
-  "<span class="hljs-attribute">status_code</span>": <span class="hljs-value"><span class="hljs-number">500</span>
-</span>}</code></pre><div style="height: 1px;"></div><h5>Schema</h5><pre><code>{
-  "<span class="hljs-attribute">$schema</span>": <span class="hljs-value"><span class="hljs-string">"http://json-schema.org/draft-04/schema#"</span></span>,
-  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"object"</span></span>,
-  "<span class="hljs-attribute">properties</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">message</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Error message."</span>
-    </span>}</span>,
-    "<span class="hljs-attribute">status_code</span>": <span class="hljs-value">{
-      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"number"</span></span>,
-      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"HTTP Status Code."</span>
-    </span>}
-  </span>}</span>,
-  "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
-    <span class="hljs-string">"message"</span>,
-    <span class="hljs-string">"status_code"</span>
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 29 Sep 2016</p><script>/* eslint-env browser */
-/* eslint quotes: [2, "single"] */
-'use strict';
+<!DOCTYPE HTML><html><head><title>TODO API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/raml2html/raml2html 4.0.0-beta5"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
 
-/*
-  Determine if a string ends with another string.
-*/
-function endsWith(str, suffix) {
-    return str.indexOf(suffix, str.length - suffix.length) !== -1;
-}
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
 
-/*
-  Get a list of direct child elements by class name.
-*/
-function childrenByClass(element, name) {
-  var filtered = [];
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
 
-  for (var i = 0; i < element.children.length; i++) {
-    var child = element.children[i];
-    var classNames = child.className.split(' ');
-    if (classNames.indexOf(name) !== -1) {
-      filtered.push(child);
-    }
-  }
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
 
-  return filtered;
-}
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
 
-/*
-  Get an array [width, height] of the window.
-*/
-function getWindowDimensions() {
-  var w = window,
-      d = document,
-      e = d.documentElement,
-      g = d.body,
-      x = w.innerWidth || e.clientWidth || g.clientWidth,
-      y = w.innerHeight || e.clientHeight || g.clientHeight;
-
-  return [x, y];
-}
-
-/*
-  Collapse or show a request/response example.
-*/
-function toggleCollapseButton(event) {
-    var button = event.target.parentNode;
-    var content = button.parentNode.nextSibling;
-    var inner = content.children[0];
-
-    if (button.className.indexOf('collapse-button') === -1) {
-      // Clicked without hitting the right element?
-      return;
-    }
-
-    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-        // Currently showing, so let's hide it
-        button.className = 'collapse-button';
-        content.style.maxHeight = '0px';
-    } else {
-        // Currently hidden, so let's show it
-        button.className = 'collapse-button show';
-        content.style.maxHeight = inner.offsetHeight + 12 + 'px';
-    }
-}
-
-function toggleTabButton(event) {
-    var i, index;
-    var button = event.target;
-
-    // Get index of the current button.
-    var buttons = childrenByClass(button.parentNode, 'tab-button');
-    for (i = 0; i < buttons.length; i++) {
-        if (buttons[i] === button) {
-            index = i;
-            button.className = 'tab-button active';
-        } else {
-            buttons[i].className = 'tab-button';
-        }
-    }
-
-    // Hide other tabs and show this one.
-    var tabs = childrenByClass(button.parentNode.parentNode, 'tab');
-    for (i = 0; i < tabs.length; i++) {
-        if (i === index) {
-            tabs[i].style.display = 'block';
-        } else {
-            tabs[i].style.display = 'none';
-        }
-    }
-}
-
-/*
-  Collapse or show a navigation menu. It will not be hidden unless it
-  is currently selected or `force` has been passed.
-*/
-function toggleCollapseNav(event, force) {
-    var heading = event.target.parentNode;
-    var content = heading.nextSibling;
-    var inner = content.children[0];
-
-    if (heading.className.indexOf('heading') === -1) {
-      // Clicked without hitting the right element?
-      return;
-    }
-
-    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-      // Currently showing, so let's hide it, but only if this nav item
-      // is already selected. This prevents newly selected items from
-      // collapsing in an annoying fashion.
-      if (force || window.location.hash && endsWith(event.target.href, window.location.hash)) {
-        content.style.maxHeight = '0px';
-      }
-    } else {
-      // Currently hidden, so let's show it
-      content.style.maxHeight = inner.offsetHeight + 12 + 'px';
-    }
-}
-
-/*
-  Refresh the page after a live update from the server. This only
-  works in live preview mode (using the `--server` parameter).
-*/
-function refresh(body) {
-    document.querySelector('body').className = 'preload';
-    document.body.innerHTML = body;
-
-    // Re-initialize the page
-    init();
-    autoCollapse();
-
-    document.querySelector('body').className = '';
-}
-
-/*
-  Determine which navigation items should be auto-collapsed to show as many
-  as possible on the screen, based on the current window height. This also
-  collapses them.
-*/
-function autoCollapse() {
-  var windowHeight = getWindowDimensions()[1];
-  var itemsHeight = 64; /* Account for some padding */
-  var itemsArray = Array.prototype.slice.call(
-    document.querySelectorAll('nav .resource-group .heading'));
-
-  // Get the total height of the navigation items
-  itemsArray.forEach(function (item) {
-    itemsHeight += item.parentNode.offsetHeight;
-  });
-
-  // Should we auto-collapse any nav items? Try to find the smallest item
-  // that can be collapsed to show all items on the screen. If not possible,
-  // then collapse the largest item and do it again. First, sort the items
-  // by height from smallest to largest.
-  var sortedItems = itemsArray.sort(function (a, b) {
-    return a.parentNode.offsetHeight - b.parentNode.offsetHeight;
-  });
-
-  while (sortedItems.length && itemsHeight > windowHeight) {
-    for (var i = 0; i < sortedItems.length; i++) {
-      // Will collapsing this item help?
-      var itemHeight = sortedItems[i].nextSibling.offsetHeight;
-      if ((itemsHeight - itemHeight <= windowHeight) || i === sortedItems.length - 1) {
-        // It will, so let's collapse it, remove its content height from
-        // our total and then remove it from our list of candidates
-        // that can be collapsed.
-        itemsHeight -= itemHeight;
-        toggleCollapseNav({target: sortedItems[i].children[0]}, true);
-        sortedItems.splice(i, 1);
-        break;
-      }
-    }
-  }
-}
-
-/*
-  Initialize the interactive functionality of the page.
-*/
-function init() {
-    var i, j;
-
-    // Make collapse buttons clickable
-    var buttons = document.querySelectorAll('.collapse-button');
-    for (i = 0; i < buttons.length; i++) {
-        buttons[i].onclick = toggleCollapseButton;
-
-        // Show by default? Then toggle now.
-        if (buttons[i].className.indexOf('show') !== -1) {
-            toggleCollapseButton({target: buttons[i].children[0]});
-        }
-    }
-
-    var responseCodes = document.querySelectorAll('.example-names');
-    for (i = 0; i < responseCodes.length; i++) {
-        var tabButtons = childrenByClass(responseCodes[i], 'tab-button');
-        for (j = 0; j < tabButtons.length; j++) {
-            tabButtons[j].onclick = toggleTabButton;
-
-            // Show by default?
-            if (j === 0) {
-                toggleTabButton({target: tabButtons[j]});
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          try {
+            if (history && history.replaceState) {
+                history.replaceState({}, '', '#');
             }
-        }
+          } catch(e) {}
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h1 {
+        font-size: 1.3em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+
+      pre code {
+        overflow: auto;
+        word-wrap: normal;
+        white-space: pre;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>TODO API documentation <small>version v1</small></h1><p>http://api.todo.dev/v1</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="login" class="panel-title">/login</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_login"><span class="parent"></span>/login</a> <span class="methods"><a href="#login_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_login" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#login_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Login user by sending his email and password in JSON format.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="login_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/login</h4></div><div class="modal-body"><div class="alert alert-info"><p>Login user by sending his email and password in JSON format.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#login_post_request" data-toggle="tab">Request</a></li><li><a href="#login_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="login_post_request"><h3>Headers</h3><ul><li><strong>apikey</strong>: <em>required (string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)</em><p>API Key used to authenticate used App.</p><p><strong>Examples</strong>:</p><pre>f4e68c61-9075-4512-b566-34be6501eef9</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Email</strong>: <em>required (string)</em><p>Unique email of user.</p></li><li><strong>Password</strong>: <em>required (string)</em><p>Password of user.</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "email": "john.smith@example.com",
+  "password": "password123"
+}</code></pre></div><div class="tab-pane" id="login_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>User is logged in successfully.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>data</strong>: <em>required (object)</em></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "data": {
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc0ODI4NTA2LCJleHAiOjE0NzQ4MzIxMDYsIm5iZiI6MTQ3NDgyODUwNiwianRpIjoiNTdkYjNjZTg0NWRlYmZkNDNkMTQyZTMzNWYyYzU3ZTEifQ.mO5ZlKvZNo_Kr8aIceDtUHtN4DYhpuBJnm0xow_5Yq8"
+  }
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><p>Response in case apikey header was not sent or is not valid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Api key is not valid.",
+  "status_code": 403
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Response in case requested resource doesn&#39;t exists.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "404 Not Found",
+  "status_code": 404
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>Response in case of a server-side error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "500 Internal Server Error",
+  "status_code": 500
+}</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="register" class="panel-title">/register</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_register"><span class="parent"></span>/register</a> <span class="methods"><a href="#register_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_register" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#register_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Register user by sending his name, email and password in JSON format.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="register_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/register</h4></div><div class="modal-body"><div class="alert alert-info"><p>Register user by sending his name, email and password in JSON format.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#register_post_request" data-toggle="tab">Request</a></li><li><a href="#register_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="register_post_request"><h3>Headers</h3><ul><li><strong>apikey</strong>: <em>required (string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)</em><p>API Key used to authenticate used App.</p><p><strong>Examples</strong>:</p><pre>f4e68c61-9075-4512-b566-34be6501eef9</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Name</strong>: <em>required (string)</em><p>Name of the user.</p></li><li><strong>Email</strong>: <em>required (string)</em><p>Email of user. Must be unique.</p></li><li><strong>Password</strong>: <em>required (string - minLength: 8)</em><p>Password of user.</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "name": "John Smith",
+  "email": "john.smith@example.com",
+  "password": "password123"
+}</code></pre></div><div class="tab-pane" id="register_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>User has been registered successfully.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>User</strong>: <em>required (object)</em></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "data": {
+    "id": "442195b3-6389-4d8c-a283-4d1d7313d6da",
+    "name": "John Smith",
+    "email": "john.smith@example.com",
+    "created_at": {
+      "date": "2016-10-01 11:38:24.000000",
+      "timezone_type": 3,
+      "timezone": "UTC"
     }
-
-    // Make nav items clickable to collapse/expand their content.
-    var navItems = document.querySelectorAll('nav .resource-group .heading');
-    for (i = 0; i < navItems.length; i++) {
-        navItems[i].onclick = toggleCollapseNav;
-
-        // Show all by default
-        toggleCollapseNav({target: navItems[i].children[0]});
+  }
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><p>Response in case apikey header was not sent or is not valid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Api key is not valid.",
+  "status_code": 403
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/422" target="_blank">422</a></h2><p>Response in case of a validation error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li><li><strong>Errors</strong>: <em>required (object)</em><p>List of errors</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "422 Unprocessable Entity",
+  "errors": {
+    "password": [
+      "The password must be at least 8 characters."
+    ]
+  },
+  "status_code": 422
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>Response in case of a server-side error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "500 Internal Server Error",
+  "status_code": 500
+}</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="users" class="panel-title">/users</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users_me"><span class="parent">/users</span>/me</a> <span class="methods"><a href="#users_me_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_users_me" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users_me_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get info about current user.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users_me_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/users</span>/me</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get info about current user.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users_me_get_request" data-toggle="tab">Request</a></li><li><a href="#users_me_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users_me_get_request"><h3>Headers</h3><ul><li><strong>apikey</strong>: <em>required (string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)</em><p>API Key used to authenticate used App.</p><p><strong>Examples</strong>:</p><pre>f4e68c61-9075-4512-b566-34be6501eef9</pre></li><li><strong>Authorization</strong>: <em>required (string)</em><p>Authorization Header in the format "Bearer {JWT TOKEN}".</p><p><strong>Examples</strong>:</p><pre>Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc1MzI1NDQ3LCJleHAiOjE0NzUzMjkwNDcsIm5iZiI6MTQ3NTMyNTQ0NywianRpIjoiZGFlOTJlNzQ5NmJiODg0ODYxZGRlMWZlYzM0ZmJmYzMifQ.WslK5UknPQoB6ceWOQ8YUsXuBvo1EVZgnU__HImdGps</pre></li></ul></div><div class="tab-pane" id="users_me_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Uset info has been fetched successfully.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>User</strong>: <em>required (object)</em></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "data": {
+    "id": "442195b3-6389-4d8c-a283-4d1d7313d6da",
+    "name": "John Smith",
+    "email": "john.smith@example.com",
+    "created_at": {
+      "date": "2016-10-01 11:38:24.000000",
+      "timezone_type": 3,
+      "timezone": "UTC"
     }
-}
-
-// Initial call to set up buttons
-init();
-
-window.onload = function () {
-    autoCollapse();
-    // Remove the `preload` class to enable animations
-    document.querySelector('body').className = '';
-};
-</script></body></html>
+  }
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Response in case Authorization header is missing or invalid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+  "status_code": 401
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><p>Response in case apikey header was not sent or is not valid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Api key is not valid.",
+  "status_code": 403
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>Response in case of a server-side error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "500 Internal Server Error",
+  "status_code": 500
+}</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="todos" class="panel-title">/todos</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_todos"><span class="parent"></span>/todos</a> <span class="methods"><a href="#todos_get"><span class="badge badge_get">get</span></a> <a href="#todos_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_todos" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#todos_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Retreive a listing of the todos for current user.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#todos_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Store a newly created todo in storage.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="todos_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/todos</h4></div><div class="modal-body"><div class="alert alert-info"><p>Retreive a listing of the todos for current user.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#todos_get_request" data-toggle="tab">Request</a></li><li><a href="#todos_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="todos_get_request"><h3>Headers</h3><ul><li><strong>apikey</strong>: <em>required (string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)</em><p>API Key used to authenticate used App.</p><p><strong>Examples</strong>:</p><pre>f4e68c61-9075-4512-b566-34be6501eef9</pre></li><li><strong>Authorization</strong>: <em>required (string)</em><p>Authorization Header in the format "Bearer {JWT TOKEN}".</p><p><strong>Examples</strong>:</p><pre>Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc1MzI1NDQ3LCJleHAiOjE0NzUzMjkwNDcsIm5iZiI6MTQ3NTMyNTQ0NywianRpIjoiZGFlOTJlNzQ5NmJiODg0ODYxZGRlMWZlYzM0ZmJmYzMifQ.WslK5UknPQoB6ceWOQ8YUsXuBvo1EVZgnU__HImdGps</pre></li></ul></div><div class="tab-pane" id="todos_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Todos are fetched successfully.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>data</strong>: <em>required (array)</em><p>In case, no todos were found, empty array is returned.</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "data": [
+    {
+      "id": "a207329e-6264-4960-a377-5b6dc8995d19",
+      "content": "Ab quae quod consequatur itaque porro est corporis rerum. Deserunt quos ab cupiditate.",
+      "is_active": false,
+      "is_completed": false,
+      "created_at": {
+        "date": "2016-10-01 09:31:30.000000",
+        "timezone_type": 3,
+        "timezone": "UTC"
+      },
+      "updated_at": {
+        "date": "2016-10-01 09:31:30.000000",
+        "timezone_type": 3,
+        "timezone": "UTC"
+      }
+    },
+    {
+      "id": "26225fbc-d939-47c0-bfdf-22497412e577",
+      "content": "Laudantium et ea consequuntur animi atque. Distinctio reiciendis omnis odio.",
+      "is_active": true,
+      "is_completed": false,
+      "created_at": {
+        "date": "2016-10-01 09:31:45.000000",
+        "timezone_type": 3,
+        "timezone": "UTC"
+      },
+      "updated_at": {
+        "date": "2016-10-01 09:31:45.000000",
+        "timezone_type": 3,
+        "timezone": "UTC"
+      }
+    }
+  ]
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Response in case Authorization header is missing or invalid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+  "status_code": 401
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><p>Response in case apikey header was not sent or is not valid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Api key is not valid.",
+  "status_code": 403
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>Response in case of a server-side error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "500 Internal Server Error",
+  "status_code": 500
+}</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="todos_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/todos</h4></div><div class="modal-body"><div class="alert alert-info"><p>Store a newly created todo in storage.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#todos_post_request" data-toggle="tab">Request</a></li><li><a href="#todos_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="todos_post_request"><h3>Headers</h3><ul><li><strong>apikey</strong>: <em>required (string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)</em><p>API Key used to authenticate used App.</p><p><strong>Examples</strong>:</p><pre>f4e68c61-9075-4512-b566-34be6501eef9</pre></li><li><strong>Authorization</strong>: <em>required (string)</em><p>Authorization Header in the format "Bearer {JWT TOKEN}".</p><p><strong>Examples</strong>:</p><pre>Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc1MzI1NDQ3LCJleHAiOjE0NzUzMjkwNDcsIm5iZiI6MTQ3NTMyNTQ0NywianRpIjoiZGFlOTJlNzQ5NmJiODg0ODYxZGRlMWZlYzM0ZmJmYzMifQ.WslK5UknPQoB6ceWOQ8YUsXuBvo1EVZgnU__HImdGps</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Content</strong>: <em>required (string)</em></li><li><strong>Is active</strong>: <em>required (boolean)</em></li><li><strong>Is completed</strong>: <em>required (boolean)</em></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, quidem.",
+  "is_active": false,
+  "is_completed": false
+}</code></pre></div><div class="tab-pane" id="todos_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2><p>Todo has been saved successfully.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Todo</strong>: <em>required (object)</em></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "data": {
+    "id": "a207329e-6264-4960-a377-5b6dc8995d19",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, quidem.",
+    "is_active": false,
+    "is_completed": false,
+    "created_at": {
+      "date": "2016-10-01 09:31:30.000000",
+      "timezone_type": 3,
+      "timezone": "UTC"
+    },
+    "updated_at": {
+      "date": "2016-10-01 09:31:30.000000",
+      "timezone_type": 3,
+      "timezone": "UTC"
+    }
+  }
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Response in case Authorization header is missing or invalid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+  "status_code": 401
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><p>Response in case apikey header was not sent or is not valid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Api key is not valid.",
+  "status_code": 403
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/422" target="_blank">422</a></h2><p>Response in case of a validation error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li><li><strong>Errors</strong>: <em>required (object)</em><p>List of errors</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "422 Unprocessable Entity",
+  "errors": {
+    "is_active": [
+      "The is active field must be true or false."
+    ]
+  },
+  "status_code": 422
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>Response in case of a server-side error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "500 Internal Server Error",
+  "status_code": 500
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_todos__uuid_"><span class="parent">/todos</span>/{uuid}</a> <span class="methods"><a href="#todos__uuid__get"><span class="badge badge_get">get</span></a> <a href="#todos__uuid__put"><span class="badge badge_put">put</span></a> <a href="#todos__uuid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_todos__uuid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#todos__uuid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Retreive a specified todo for current user.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#todos__uuid__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update the specified resource in storage.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#todos__uuid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Remove the specified todo from storage.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="todos__uuid__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/todos</span>/{uuid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Retreive a specified todo for current user.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#todos__uuid__get_request" data-toggle="tab">Request</a></li><li><a href="#todos__uuid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="todos__uuid__get_request"><h3>URI Parameters</h3><ul><li><strong>uuid</strong>: <em>required (Uuid.Uuid)</em><p>UUID of requested todo</p></li></ul><h3>Headers</h3><ul><li><strong>apikey</strong>: <em>required (string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)</em><p>API Key used to authenticate used App.</p><p><strong>Examples</strong>:</p><pre>f4e68c61-9075-4512-b566-34be6501eef9</pre></li><li><strong>Authorization</strong>: <em>required (string)</em><p>Authorization Header in the format "Bearer {JWT TOKEN}".</p><p><strong>Examples</strong>:</p><pre>Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc1MzI1NDQ3LCJleHAiOjE0NzUzMjkwNDcsIm5iZiI6MTQ3NTMyNTQ0NywianRpIjoiZGFlOTJlNzQ5NmJiODg0ODYxZGRlMWZlYzM0ZmJmYzMifQ.WslK5UknPQoB6ceWOQ8YUsXuBvo1EVZgnU__HImdGps</pre></li></ul></div><div class="tab-pane" id="todos__uuid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Todo has been successfully fetched.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Todo</strong>: <em>required (object)</em><p>In case, no todo was found, data will be null.</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "data": {
+    "id": "a207329e-6264-4960-a377-5b6dc8995d19",
+    "content": "Ab quae quod consequatur itaque porro est corporis rerum. Deserunt quos ab cupiditate.",
+    "is_active": false,
+    "is_completed": false,
+    "created_at": {
+      "date": "2016-10-01 09:31:30.000000",
+      "timezone_type": 3,
+      "timezone": "UTC"
+    },
+    "updated_at": {
+      "date": "2016-10-01 09:31:30.000000",
+      "timezone_type": 3,
+      "timezone": "UTC"
+    }
+  }
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Response in case Authorization header is missing or invalid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+  "status_code": 401
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><p>Response in case apikey header was not sent or is not valid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Api key is not valid.",
+  "status_code": 403
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>Response in case of a server-side error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "500 Internal Server Error",
+  "status_code": 500
+}</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="todos__uuid__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/todos</span>/{uuid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update the specified resource in storage.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#todos__uuid__put_request" data-toggle="tab">Request</a></li><li><a href="#todos__uuid__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="todos__uuid__put_request"><h3>URI Parameters</h3><ul><li><strong>uuid</strong>: <em>required (Uuid.Uuid)</em><p>UUID of requested todo</p></li></ul><h3>Headers</h3><ul><li><strong>apikey</strong>: <em>required (string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)</em><p>API Key used to authenticate used App.</p><p><strong>Examples</strong>:</p><pre>f4e68c61-9075-4512-b566-34be6501eef9</pre></li><li><strong>Authorization</strong>: <em>required (string)</em><p>Authorization Header in the format "Bearer {JWT TOKEN}".</p><p><strong>Examples</strong>:</p><pre>Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc1MzI1NDQ3LCJleHAiOjE0NzUzMjkwNDcsIm5iZiI6MTQ3NTMyNTQ0NywianRpIjoiZGFlOTJlNzQ5NmJiODg0ODYxZGRlMWZlYzM0ZmJmYzMifQ.WslK5UknPQoB6ceWOQ8YUsXuBvo1EVZgnU__HImdGps</pre></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Content</strong>: <em>(string)</em></li><li><strong>Is active</strong>: <em>(boolean)</em></li><li><strong>Is completed</strong>: <em>(boolean)</em></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "is_active": true
+}</code></pre></div><div class="tab-pane" id="todos__uuid__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Todo has been successfully updated.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Todo</strong>: <em>required (object)</em></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "data": {
+    "id": "a207329e-6264-4960-a377-5b6dc8995d19",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, quidem.",
+    "is_active": false,
+    "is_completed": true,
+    "created_at": {
+      "date": "2016-10-01 09:31:30.000000",
+      "timezone_type": 3,
+      "timezone": "UTC"
+    },
+    "updated_at": {
+      "date": "2016-10-01 10:31:30.000000",
+      "timezone_type": 3,
+      "timezone": "UTC"
+    }
+  }
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Response in case Authorization header is missing or invalid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+  "status_code": 401
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><p>Response in case apikey header was not sent or is not valid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Api key is not valid.",
+  "status_code": 403
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Response in case requested resource doesn&#39;t exists.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "404 Not Found",
+  "status_code": 404
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/422" target="_blank">422</a></h2><p>Response in case of a validation error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li><li><strong>Errors</strong>: <em>required (object)</em><p>List of errors</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "422 Unprocessable Entity",
+  "errors": {
+    "is_active": [
+      "The is active field must be true or false."
+    ]
+  },
+  "status_code": 422
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>Response in case of a server-side error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "500 Internal Server Error",
+  "status_code": 500
+}</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="todos__uuid__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/todos</span>/{uuid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Remove the specified todo from storage.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#todos__uuid__delete_request" data-toggle="tab">Request</a></li><li><a href="#todos__uuid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="todos__uuid__delete_request"><h3>URI Parameters</h3><ul><li><strong>uuid</strong>: <em>required (Uuid.Uuid)</em><p>UUID of requested todo</p></li></ul><h3>Headers</h3><ul><li><strong>apikey</strong>: <em>required (string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)</em><p>API Key used to authenticate used App.</p><p><strong>Examples</strong>:</p><pre>f4e68c61-9075-4512-b566-34be6501eef9</pre></li><li><strong>Authorization</strong>: <em>required (string)</em><p>Authorization Header in the format "Bearer {JWT TOKEN}".</p><p><strong>Examples</strong>:</p><pre>Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2FwaS50b2RvaXRrLmRldlwvdjFcL2xvZ2luIiwiaWF0IjoxNDc1MzI1NDQ3LCJleHAiOjE0NzUzMjkwNDcsIm5iZiI6MTQ3NTMyNTQ0NywianRpIjoiZGFlOTJlNzQ5NmJiODg0ODYxZGRlMWZlYzM0ZmJmYzMifQ.WslK5UknPQoB6ceWOQ8YUsXuBvo1EVZgnU__HImdGps</pre></li></ul></div><div class="tab-pane" id="todos__uuid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><p>Todo has been successfully removed.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><p>Response in case Authorization header is missing or invalid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Failed to authenticate because of bad credentials or an invalid authorization header.",
+  "status_code": 401
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2><p>Response in case apikey header was not sent or is not valid.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "Api key is not valid.",
+  "status_code": 403
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Response in case requested resource doesn&#39;t exists.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "404 Not Found",
+  "status_code": 404
+}</code></pre><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>Response in case of a server-side error.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Properties</strong><ul><li><strong>Message</strong>: <em>required (string)</em><p>Error message</p></li><li><strong>Status code</strong>: <em>required (integer)</em><p>HTTP Status code</p></li></ul><p><strong>Examples</strong>:</p><pre><code>{
+  "message": "500 Internal Server Error",
+  "status_code": 500
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#login">/login</a></li><li><a href="#register">/register</a></li><li><a href="#users">/users</a></li><li><a href="#todos">/todos</a></li></ul></div></div></div></div></body></html>

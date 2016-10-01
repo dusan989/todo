@@ -40,18 +40,10 @@ class TodoManager
      * @param  \TodoApi\Models\User   $user
      *
      * @return \Illuminate\Support\Collection
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function all(User $user)
     {
-        $todos = $user->todos;
-
-        if ($todos->isEmpty()) {
-            throw new NotFoundHttpException;
-        }
-
-        return $todos;
+        return $user->todos;
     }
 
     /**
@@ -60,9 +52,7 @@ class TodoManager
      * @param  \TodoApi\Models\User $user
      * @param  string               $uuid
      *
-     * @return \TodoApi\Models\Todo
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return \TodoApi\Models\Todo|null
      */
     public function get(User $user, $uuid)
     {
@@ -70,7 +60,7 @@ class TodoManager
         if ($todo->exists()) {
             $response = $todo->first();
         } else {
-            throw new NotFoundHttpException;
+            $response = null;
         }
 
         return $response;
@@ -91,10 +81,14 @@ class TodoManager
     {
         $todo = $this->get($user, $uuid);
 
-        if ($todo->delete()) {
-            $response = true;
+        $response = true;
+
+        if (!empty($todo)) {
+            if (!$todo->delete()) {
+                throw new HttpException(500);
+            }
         } else {
-            throw new HttpException(500);
+            throw new NotFoundHttpException;
         }
 
         return $response;
@@ -150,6 +144,7 @@ class TodoManager
      *
      * @throws \Dingo\Api\Exception\ValidationHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function update($user, array $data, $uuid)
     {
@@ -164,6 +159,11 @@ class TodoManager
         }
 
         $todo = $this->get($user, $uuid);
+
+        if (empty($todo)) {
+            throw new NotFoundHttpException;
+        }
+
         $todo->content = (isset($data['content'])) ? $data['content'] : $todo->content;
         $todo->is_active = (isset($data['is_active'])) ? $data['is_active'] : $todo->is_active;
         $todo->is_completed = (isset($data['is_completed'])) ? $data['is_completed'] : $todo->is_completed;

@@ -41,7 +41,7 @@ class TodoTest extends TestCase
 
         $login = json_decode($login);
 
-        $this->token = $login->token;
+        $this->token = $login->data->token;
     }
 
     /**
@@ -60,14 +60,11 @@ class TodoTest extends TestCase
         $response->seeJsonStructure([
             'data' => [
                 '*' => [
-                    'type',
-                    'id',
-                    'attributes' => [
-                        'content',
-                        'is_active',
-                        'is_completed',
-                        'created_at',
-                    ],
+                    'content',
+                    'is_active',
+                    'is_completed',
+                    'created_at',
+                    'updated_at',
                 ],
             ],
         ]);
@@ -88,18 +85,14 @@ class TodoTest extends TestCase
         $response->assertResponseOK();
         $response->seeJsonStructure([
             'data' => [
-                'type',
-                'id',
-                'attributes' => [
-                    'content',
-                    'is_active',
-                    'is_completed',
-                    'created_at',
-                ],
+                'content',
+                'is_active',
+                'is_completed',
+                'created_at',
+                'updated_at',
             ],
         ]);
         $response->seeJson([
-            'type' => 'todos',
             'content' => 'Ab quae quod consequatur itaque porro est corporis rerum. Deserunt quos ab cupiditate.',
         ]);
     }
@@ -116,7 +109,10 @@ class TodoTest extends TestCase
             'Authorization' => 'Bearer ' . $this->token,
         ]);
 
-        $response->assertResponseStatus(404);
+        $response->assertResponseStatus(200)
+            ->seeJson([
+                'data' => null,
+            ]);
     }
 
     /**
@@ -173,14 +169,9 @@ class TodoTest extends TestCase
     public function testSuccessfullCreateTodo()
     {
         $response = $this->json('POST', '/todos', [
-            'data' => [
-                'type' => 'todos',
-                'attributes' => [
-                    'content' => $this->todo['content'],
-                    'is_active' => $this->todo['is_active'],
-                    'is_completed' => $this->todo['is_completed'],
-                ],
-            ],
+            'content' => $this->todo['content'],
+            'is_active' => $this->todo['is_active'],
+            'is_completed' => $this->todo['is_completed'],
         ], [
             'apikey' => $this->apiAuth['uuid'],
             'Authorization' => 'Bearer ' . $this->token,
@@ -189,18 +180,14 @@ class TodoTest extends TestCase
         $response->assertResponseStatus(201);
         $response->seeJsonStructure([
             'data' => [
-                'type',
-                'id',
-                'attributes' => [
-                    'content',
-                    'is_active',
-                    'is_completed',
-                    'created_at',
-                ],
+                'content',
+                'is_active',
+                'is_completed',
+                'created_at',
+                'updated_at',
             ],
         ]);
         $response->seeJson([
-            'type' => 'todos',
             'content' => $this->todo['content'],
             'is_active' => $this->todo['is_active'],
             'is_completed' => $this->todo['is_completed'],
@@ -215,13 +202,8 @@ class TodoTest extends TestCase
     public function testUnvalidCreateTodo()
     {
         $response = $this->json('POST', '/todos', [
-            'data' => [
-                'type' => 'todos',
-                'attributes' => [
-                    'content' => $this->todo['content'],
-                    'is_active' => $this->todo['is_active'],
-                ],
-            ],
+            'content' => $this->todo['content'],
+            'is_active' => $this->todo['is_active'],
         ], [
             'apikey' => $this->apiAuth['uuid'],
             'Authorization' => 'Bearer ' . $this->token,
@@ -246,13 +228,8 @@ class TodoTest extends TestCase
         $todoForUpdate = Todo::where('uuid', 'a207329e-6264-4960-a377-5b6dc8995d19')->first();
 
         $response = $this->json('PUT', '/todos/a207329e-6264-4960-a377-5b6dc8995d19', [
-            'data' => [
-                'type' => 'todos',
-                'attributes' => [
-                    'content' => 'updated content',
-                    'is_active' => true,
-                ],
-            ],
+            'content' => 'updated content',
+            'is_active' => true,
         ], [
             'apikey' => $this->apiAuth['uuid'],
             'Authorization' => 'Bearer ' . $this->token,
@@ -261,18 +238,14 @@ class TodoTest extends TestCase
         $response->assertResponseStatus(200);
         $response->seeJsonStructure([
             'data' => [
-                'type',
-                'id',
-                'attributes' => [
-                    'content',
-                    'is_active',
-                    'is_completed',
-                    'created_at',
-                ],
+                'content',
+                'is_active',
+                'is_completed',
+                'created_at',
+                'updated_at',
             ],
         ]);
         $response->seeJson([
-            'type' => 'todos',
             'content' => 'updated content',
             'is_active' => true,
             'is_completed' => false,
@@ -296,13 +269,8 @@ class TodoTest extends TestCase
         $todoForUpdate = Todo::where('uuid', 'a207329e-6264-4960-a377-5b6dc8995d19')->first();
 
         $response = $this->json('PUT', '/todos/a207329e-6264-4960-a377-5b6dc8995d19', [
-            'data' => [
-                'type' => 'todos',
-                'attributes' => [
-                    'content' => 'updated content',
-                    'is_active' => 'some string',
-                ],
-            ],
+            'content' => 'updated content',
+            'is_active' => 'some string',
         ], [
             'apikey' => $this->apiAuth['uuid'],
             'Authorization' => 'Bearer ' . $this->token,

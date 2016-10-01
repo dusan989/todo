@@ -1,0 +1,87 @@
+#%RAML 1.0 Library
+uses:
+  Uuid: uuid.raml
+types:
+  Todo:
+    type: object
+    properties:
+      id:
+        required: true
+        displayName: UUID
+        type: Uuid.Uuid
+      content:
+        required: true
+        displayName: Content
+        type: string
+      is_active:
+        type: boolean
+        displayName: Is active
+        required: true
+      is_completed:
+        type: boolean
+        displayName: Is completed
+        required: true
+      created_at:
+        required: true
+        type: object
+        displayName: Created at
+        properties:
+          date:
+            required: true
+            displayName: Date
+            type: string
+          timezone_type:
+            required: true
+            displayName: Timezone type
+            type: integer
+          timezone:
+            type: string
+            displayName: Timezone
+            required: true
+      updated_at:
+        required: true
+        type: object
+        displayName: Updated at
+        properties:
+          date:
+            required: true
+            displayName: Date
+            type: string
+          timezone_type:
+            required: true
+            displayName: Timezone type
+            type: integer
+          timezone:
+            type: string
+            displayName: Timezone
+            required: true
+  TodoClient:
+    type: object
+    properties:
+      content:
+        required: true
+        displayName: Content
+        type: string
+      is_active:
+        type: boolean
+        displayName: Is active
+        required: true
+      is_completed:
+        type: boolean
+        displayName: Is completed
+        required: true
+  TodoClientUpdate:
+    type: object
+    properties:
+      content:
+        required: false
+        displayName: Content
+        type: string
+      is_active:
+        type: boolean
+        displayName: Is active
+        required: false
+      is_completed:
+        type: boolean
+        displayName: Is completed
+        required: false

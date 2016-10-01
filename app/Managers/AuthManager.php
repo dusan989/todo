@@ -40,21 +40,11 @@ class AuthManager
      *
      * @return array
      *
-     * @throws \Dingo\Api\Exception\ValidationHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function login(array $credentials)
     {
-        $validator = $this->validator->make($credentials, [
-            'email'    => 'required|email',
-            'password' => 'required|string|min:8',
-        ]);
-
-        if ($validator->fails()) {
-            throw new ValidationHttpException($validator->errors());
-        }
-
         try {
             $token = JWTAuth::attempt($credentials);
             if (!$token) {

@@ -21,7 +21,9 @@ class LoginTest extends TestCase
 
         $response->assertResponseOK();
         $response->seeJsonStructure([
-            'token'
+            'data' => [
+                'token',
+            ],
         ]);
     }
 
@@ -58,26 +60,6 @@ class LoginTest extends TestCase
     }
 
     /**
-     * A missing data login test.
-     *
-     * @return void
-     */
-    public function testMissingDataLogin()
-    {
-        $response = $this->json('POST', '/login', [
-            'email' => $this->users['exists']['email'],
-        ], [
-            'apikey' => $this->apiAuth['uuid'],
-        ]);
-
-        $response->assertResponseStatus(422);
-        $response->seeJsonStructure([
-            'message',
-            'status_code',
-        ]);
-    }
-
-    /**
      * A Me login test.
      *
      * @return void
@@ -95,22 +77,18 @@ class LoginTest extends TestCase
 
         $me = $this->json('GET', '/users/me', [], [
             'apikey' => $this->apiAuth['uuid'],
-            'Authorization' => 'Bearer ' . $login->token,
+            'Authorization' => 'Bearer ' . $login->data->token,
         ]);
 
         $me->assertResponseOK();
         $me->seeJsonStructure([
             'data' => [
-                'type',
-                'id',
-                'attributes' => [
-                    'name',
-                    'email',
-                    'created_at' => [
-                        'date',
-                        'timezone_type',
-                        'timezone',
-                    ],
+                'name',
+                'email',
+                'created_at' => [
+                    'date',
+                    'timezone_type',
+                    'timezone',
                 ],
             ],
         ]);

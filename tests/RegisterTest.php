@@ -34,16 +34,12 @@ class RegisterTest extends TestCase
         $response->assertResponseStatus(201);
         $response->seeJsonStructure([
             'data' => [
-                'type',
-                'id',
-                'attributes' => [
-                    'name',
-                    'email',
-                    'created_at' => [
-                        'date',
-                        'timezone_type',
-                        'timezone',
-                    ],
+                'name',
+                'email',
+                'created_at' => [
+                    'date',
+                    'timezone_type',
+                    'timezone',
                 ],
             ],
         ]);
