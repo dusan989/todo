@@ -43,7 +43,7 @@ class CheckApiKey
 
             if ($apiAuth->exists()) {
                 if ($isAdmin) {
-                    $apiAuth = $apiAuth->get();
+                    $apiAuth = $apiAuth->first();
                     if ($apiAuth->is_admin) {
                         return $next($request);
                     } else {
